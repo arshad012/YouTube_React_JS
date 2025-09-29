@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { updateClickedVideoDetails } from "../../Redux/searchedData/slice";
 import EmptyPage from "../../components/EmptyPage";
 import BottomBar from "../../components/BottomBar";
+import { getTimeTaken } from "../../Utils";
 
 function Home() {
     const dispatch = useDispatch();
@@ -33,9 +34,9 @@ function Home() {
             <HeightFiller />
 
             <SimpleGrid
-                mt={{base: 0, md: 10}}
+                mt={{ base: 0, md: 10 }}
                 columns={{ base: 1, sm: 2, xl: 3 }}
-                spacingX={{base: 0, sm: '25px'}}
+                spacingX={{ base: 0, sm: '25px' }}
                 spacingY='40px'
                 paddingX={{ base: 0, sm: "10px", md: "25px", lg: "40px" }}
             >
