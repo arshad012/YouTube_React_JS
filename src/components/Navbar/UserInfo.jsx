@@ -1,5 +1,5 @@
-import { Box, Button, Flex, Avatar, Menu, MenuButton, MenuList, MenuItem, IconButton, Text, Hide, Show } from "@chakra-ui/react"
-import { AddIcon, BellIcon, PlusSquareIcon } from "@chakra-ui/icons"
+import { Box, Button, Flex, Avatar, Menu, MenuButton, MenuList, MenuItem, IconButton, Text } from "@chakra-ui/react";
+import { AddIcon, BellIcon, PlusSquareIcon } from "@chakra-ui/icons";
 import { IoCreateOutline } from "react-icons/io5";
 import { HiOutlineSignalSlash } from "react-icons/hi2";
 import { youtubeLoggedinUser_localStorage_key } from "../../Utils";
@@ -48,7 +48,7 @@ function UserInfo() {
 
                 <Menu>
                     <MenuButton>
-                        <Avatar size='sm' name={youtubeLoggedinUser.name ?? 'Arshad ali'} src={youtubeLoggedinUser?.image} />
+                        <Avatar size='sm' src={youtubeLoggedinUser?.image} />
                     </MenuButton>
 
                     <MenuList bg='#282828' border='none'>

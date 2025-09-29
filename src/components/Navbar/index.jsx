@@ -7,11 +7,13 @@ import { useState } from "react";
 import SmallScreenSearchBar from "../SmallScreenSearchBar";
 import { Search2Icon, ArrowBackIcon } from "@chakra-ui/icons";
 import { toggleShowMenu } from '../../Redux/ShowMenuSmallScreen/slice';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { searchedDataSelector } from "../../Redux/searchedData/selector";
 
 function Navbar() {
     const [showSearchBar, setShowSearchBar] = useState(false);
     const dispatch = useDispatch();
+    const { videos } = useSelector(searchedDataSelector);
 
     const handleToggleSmallScreenSearchBar = () => {
         setShowSearchBar(prev => !prev);
@@ -49,14 +51,14 @@ function Navbar() {
                 <Show breakpoint='(max-width: 750px)'>
                     <IconButton
                         color='white'
-                        icon={<Search2Icon boxSize={3} />}
+                        icon={<Search2Icon boxSize={4} />}
                         borderRadius='full'
                         bg='inherit'
-                        _hover={{ bg: '#434242ff' }}
-                        _active={{ bg: '#565353ff' }}
+                        // _hover={{ bg: '#434242ff' }}
+                        // _active={{ bg: '#565353ff' }}
                         onClick={() => setShowSearchBar(prev => !prev)}
                     />
-                    <Switch size='sm' colorScheme="red" onChange={handleToggleShowMenu}/>
+                    {videos.length > 0 && <Switch size='sm' colorScheme="red" onChange={handleToggleShowMenu}/>}
                     {showSearchBar && 
                         <Flex
                             align="center"
@@ -77,8 +79,8 @@ function Navbar() {
                                 icon={<ArrowBackIcon boxSize={5} />}
                                 borderRadius='full'
                                 bg='inherit'
-                                _hover={{ bg: '#434242ff' }}
-                                _active={{ bg: '#565353ff' }}
+                                // _hover={{ bg: '#434242ff' }}
+                                // _active={{ bg: '#565353ff' }}
                                 onClick={handleToggleSmallScreenSearchBar}
                             />
                             <SmallScreenSearchBar  

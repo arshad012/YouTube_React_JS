@@ -8,7 +8,7 @@ function EmptyPage() {
             <Text
                 color="white"
                 textAlign="center"
-                fontSize={{base: "xl", md: "4xl", lg: "5xl"}}
+                fontSize={{base: "xl", md: "4xl"}}
                 w={{base: "80%", sm: "60%"}}
                 bgColor='#303030'
                 m="auto"

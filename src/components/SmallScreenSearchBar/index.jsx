@@ -62,12 +62,12 @@ function SmallScreenSearchBar({ onClick }) {
             <InputRightAddon bg='inherit' borderColor='#222222' borderRadius='0 50px 50px 0' px={0}>
                 <IconButton
                     color='white'
-                    icon={<Search2Icon color='white' boxSize={3} />}
+                    icon={<Search2Icon color='white' boxSize={4} />}
                     bg='#222222'
-                    px={3}
+                    px={4}
                     borderColor='#222222'
                     borderRadius='0 50px 50px 0'
-                    _hover={{ bg: '#222222' }}
+                    // _hover={{ bg: '#222222' }}
                     onClick={searchData}
                 />
             </InputRightAddon>
