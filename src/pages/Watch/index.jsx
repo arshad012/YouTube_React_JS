@@ -58,7 +58,7 @@ function Watch() {
 
       <Flex
         gap={{ base: "50px", lg: "15px", xl: "30px", "2xl": "50px" }}
-        mt={5} 
+        mt={{base: 0, md: 5}} 
         h="fit-content"
         direction={{ base: "column", lg: 'row' }}
       >
@@ -135,7 +135,14 @@ function Watch() {
 
       </Flex>
 
-      <SimpleGrid mt={20} columns={{ base: 1, sm: 2, lg: 3 }} spacingX='25px' spacingY='40px' paddingX={{ base: 0, sm: "10px", lg: "20px" }}>
+      <SimpleGrid 
+        mt={20} 
+        columns={{ base: 1, sm: 2, lg: 3 }} 
+        spacingX='25px' 
+        spacingY='40px' 
+        // paddingX={{ base: 0, sm: "10px", lg: "20px" }}
+        paddingX={{ base: 0, sm: "10px", md: "25px", lg: "40px" }}
+      >
         {videos.map((video, i) => (
           <VideoCard
             key={i}

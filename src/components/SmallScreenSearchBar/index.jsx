@@ -1,6 +1,5 @@
 import { Search2Icon } from '@chakra-ui/icons';
-import { IconButton, Input, InputGroup, InputLeftElement, InputRightAddon } from '@chakra-ui/react';
-import { SearchIcon } from 'lucide-react';
+import { IconButton, Input, InputGroup, InputRightAddon } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchQuerySelector } from '../../Redux/SearchQuery/selector';
@@ -8,7 +7,7 @@ import { updateSearchQuery } from '../../Redux/SearchQuery/slice';
 import { useNavigate } from 'react-router-dom';
 import { updateSearchedData } from '../../Redux/searchedData/slice';
 
-function SmallScreenSearchBar({onClick}) {
+function SmallScreenSearchBar({ onClick }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [inputFocus, setInputFocus] = useState(false);
@@ -48,11 +47,6 @@ function SmallScreenSearchBar({onClick}) {
 
     return (
         <InputGroup>
-            {inputFocus &&
-                <InputLeftElement pointerEvents='none'>
-                    <SearchIcon color='gray.300' />
-                </InputLeftElement>
-            }
             <Input
                 placeholder='Search'
                 border='2px'
@@ -67,11 +61,10 @@ function SmallScreenSearchBar({onClick}) {
             />
             <InputRightAddon bg='inherit' borderColor='#222222' borderRadius='0 50px 50px 0' px={0}>
                 <IconButton
-                    aria-label='microphone'
                     color='white'
-                    icon={<Search2Icon color='white' boxSize={5} />}
+                    icon={<Search2Icon color='white' boxSize={3} />}
                     bg='#222222'
-                    px={6}
+                    px={3}
                     borderColor='#222222'
                     borderRadius='0 50px 50px 0'
                     _hover={{ bg: '#222222' }}

@@ -2,8 +2,11 @@ import { Box, HStack, Text, VStack, Avatar } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { House, Youtube, Package2 } from 'lucide-react';
 import { youtubeLoggedinUser_localStorage_key } from "../../Utils";
+import { useSelector } from "react-redux";
+import { showMenuSmallScreenSelector } from "../../Redux/ShowMenuSmallScreen/selector";
 
 function BottomBar() {
+    const { showMenu } = useSelector(showMenuSmallScreenSelector);
     const navigate = useNavigate();
     const youtubeLoggedinUser = JSON.parse(localStorage.getItem(youtubeLoggedinUser_localStorage_key)) ?? {};
 
@@ -12,26 +15,26 @@ function BottomBar() {
             id: "home",
             label: "Home",
             path: "/",
-            icon: <House size={30} />
+            icon: <House size={20} />
         },
         {
             id: "shorts",
             label: "Shorts",
             path: "/shorts",
-            icon: <Youtube size={30} />
+            icon: <Youtube size={20} />
             
         },
         {
             id: "subscriptions",
             label: "Subscriptions",
             path: "/subscriptions",
-            icon: <Package2 size={30} />
+            icon: <Package2 size={20} />
         },
         {
             id: "you",
             label: "You",
             path: "you",
-            icon: <Avatar size='sm' src={youtubeLoggedinUser?.image} />
+            icon: <Avatar size='xs' src={youtubeLoggedinUser?.image} />
         },
     ];
 
@@ -43,23 +46,25 @@ function BottomBar() {
         <Box
             position='absolute'
             left={0}
-            bottom={0}
+            bottom={showMenu ? "60px" : 0}
             w='100%'
-            minH='60px'
+            h='50px'
             bgColor='rgba(15, 15, 15, 0.7)'
             backdropFilter='blur(20px)'
             py={1}
+            transition="all 0.2s"
         >
             <HStack 
                 boxSize="full"
                 color={"white"}
                 justify="space-around"
                 align="center"
+                px="30px"
             >
                 {userNavigations.map(item => (
-                    <VStack key={item.id} gap={1} onClick={() => handleClick(item.path)}>
+                    <VStack key={item.id} gap={1} onClick={() => handleClick(item.path)} _hover={{cursor: "pointer"}}>
                         <Box>{item.icon}</Box>
-                        <Text flex={1}>{item.label}</Text>
+                        <Text fontSize="xs">{item.label}</Text>
                     </VStack>
                 ))}
             </HStack>

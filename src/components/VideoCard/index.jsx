@@ -1,6 +1,12 @@
 import { Box, Image, Text, VStack, HStack } from "@chakra-ui/react";
 
 function VideoCard({ item, onClick }) {
+    let title = item.snippet.title;
+    if(window.innerWidth <= 1030) {
+        title = title.slice(0, 50);
+        title += "...";
+    }
+
     return (
         <Box onClick={() => onClick(item)} _hover={{cursor: "pointer"}}>
             <VStack>
@@ -10,14 +16,14 @@ function VideoCard({ item, onClick }) {
                     borderRadius="xl"
                 />
 
-                <HStack justify="start" align="start" w="full">
+                <HStack justify="start" align="start" w="full" px={{base: 5, sm: 0}}>
                     <Box h="40px" w="40px" mt={1}>
                         <Image boxSize="full" borderRadius="full" src={item.snippet.thumbnails.default.url} alt="" />
                     </Box>
                     <VStack flex={1} align="start" gap={0}>
-                        <Text fontSize="lg">{item.snippet.title}</Text>
-                        <Text color="whiteAlpha.700">{item.snippet.channelTitle}</Text>
-                        <Text color="whiteAlpha.700" fontSize="sm">{item.snippet.publishTime}</Text>
+                        <Text>{title}</Text>
+                        <Text color="whiteAlpha.700" fontSize={{base: "xs", sm: "sm"}}>{item.snippet.channelTitle}</Text>
+                        <Text color="whiteAlpha.700" fontSize={{base: "xs", sm: "sm"}}>{item.snippet.publishTime}</Text>
                     </VStack>
                 </HStack>
             </VStack>
@@ -27,7 +33,7 @@ function VideoCard({ item, onClick }) {
 
 export default VideoCard;
 
-const a = {
+const smapleData = {
     "kind": "youtube#searchResult",
     "etag": "CTHtQkL2u__0X9orme3mpqcO8d8",
     "id": {

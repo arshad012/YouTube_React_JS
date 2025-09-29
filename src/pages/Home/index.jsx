@@ -33,7 +33,7 @@ function Home() {
             <HeightFiller />
 
             <SimpleGrid
-                mt={10}
+                mt={{base: 0, md: 10}}
                 columns={{ base: 1, sm: 2, xl: 3 }}
                 spacingX={{base: 0, sm: '25px'}}
                 spacingY='40px'
