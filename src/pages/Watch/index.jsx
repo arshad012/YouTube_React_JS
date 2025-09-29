@@ -1,16 +1,17 @@
-import { Box, Text, VStack, Flex, SimpleGrid, HStack, Image, Show } from "@chakra-ui/react";
+import { Box, Text, VStack, Flex, HStack, Image, Show } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
 import HeightFiller from "../../components/HeightFiller";
 import { useSelector, useDispatch } from "react-redux";
 import { CheckCircleIcon } from '@chakra-ui/icons';
 
 import { searchedDataSelector } from "../../Redux/searchedData/selector";
-import VideoCard from "../../components/VideoCard";
 import MiniVideoCard from "../../components/MiniVideoCard";
 import "../../App.css";
 import { updateClickedVideoDetails } from "../../Redux/searchedData/slice";
 import { useEffect, useRef } from "react";
 import BottomBar from "../../components/BottomBar";
+import WatchPageVideoCard from "../../components/WatchPageVideoCard";
+import { getTimeTaken } from "../../Utils";
 
 
 function Watch() {
@@ -20,13 +21,13 @@ function Watch() {
   const { clickedVideoDetails, videos } = useSelector(searchedDataSelector);
   const [searchParams, setSearchParams] = useSearchParams();
   const v = searchParams.get("v") ?? "";
+  const windowWidth = window.innerWidth;
 
   useEffect(() => {
     videoRef.current.focus();
   }, [])
 
   const smallDataSlice = videos.slice(0, 20);
-
 
   let playingVideoTitle = clickedVideoDetails?.snippet?.title ?? "";
   if (playingVideoTitle) {
@@ -68,7 +69,7 @@ function Watch() {
             <Box w="100%" h="fit-content" borderRadius="2xl" overflow="hidden" ref={videoRef}>
               <iframe
                 width="100%"
-                height="500"
+                height={windowWidth < 600 ? "350" : "500"}
                 // src={`https://www.youtube.com/embed/${v}?autoplay=1&mute=1&videoEmbeddable=true&type=playlist`}
                 src={`https://www.youtube.com/embed/${v}?autoplay=1&mute=1`}
                 title="YouTube video player"
@@ -81,7 +82,7 @@ function Watch() {
             </Box>
 
             <Box px={{ base: 5, sm: 0 }}>
-              <Text fontSize="xl">{clickedVideoDetails.snippet.title}</Text>
+              <Text fontSize={{base: "md", sm: "lg", md: "xl"}}>{clickedVideoDetails.snippet.title}</Text>
 
               <HStack justify="start" align="center" w="full" gap={5}>
                 <Box h={{ base: "40px", sm: "50px" }} w={{ base: "40px", sm: "50px" }} mt={1}>
@@ -89,6 +90,7 @@ function Watch() {
                 </Box>
                 <Text>{clickedVideoDetails.snippet.channelTitle} <CheckCircleIcon color="whiteAlpha.700" boxSize={3} /></Text>
               </HStack>
+              <Text fontSize={{base: "xs"}} mt={2}>{getTimeTaken(clickedVideoDetails.snippet.publishTime)}</Text>
             </Box>
 
           </VStack>
@@ -135,28 +137,26 @@ function Watch() {
 
       </Flex>
 
-      <SimpleGrid 
+      <VStack 
         mt={20} 
-        columns={{ base: 1, sm: 2, lg: 3 }} 
-        spacingX='25px' 
-        spacingY='40px' 
-        // paddingX={{ base: 0, sm: "10px", lg: "20px" }}
-        paddingX={{ base: 0, sm: "10px", md: "25px", lg: "40px" }}
+        gap={"40px"}
+        align="start"
+        paddingX={{ base: 0, sm: "10px", md: "15px", lg: "40px" }}
       >
         {videos.map((video, i) => (
-          <VideoCard
+          <WatchPageVideoCard
             key={i}
             item={video}
             onClick={handleVideoClick}
           />
         ))}
-      </SimpleGrid>
+      </VStack>
 
       <Show breakpoint='(max-width: 750px)'>
         <BottomBar />
       </Show>
 
-      {/* <HeightFiller /> */}
+      <HeightFiller />
     </Box>
   )
 }

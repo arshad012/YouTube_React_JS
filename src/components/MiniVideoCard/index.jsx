@@ -33,7 +33,7 @@ function MiniVideoCard({ item, onClick }) {
             </Box>
 
             <Box
-                w={{base: "20%", lg: "25%"}}
+                w={{base: "25%", lg: "30%"}}
                 borderRadius="md"
                 overflow="hidden"
             >

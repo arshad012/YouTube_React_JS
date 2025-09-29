@@ -44,7 +44,7 @@ function SearchBar() {
             const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${searchQuery}&key=${API_KEY}`);
             const data = await response.json();
             
-            navigate("/");
+            // navigate("/");
             dispatch(updateSearchedData(data));
         } catch (error) {
             console.log('error occured while fetching videos:', error);

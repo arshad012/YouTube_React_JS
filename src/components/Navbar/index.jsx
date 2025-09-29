@@ -54,11 +54,9 @@ function Navbar() {
                         icon={<Search2Icon boxSize={4} />}
                         borderRadius='full'
                         bg='inherit'
-                        // _hover={{ bg: '#434242ff' }}
-                        // _active={{ bg: '#565353ff' }}
                         onClick={() => setShowSearchBar(prev => !prev)}
                     />
-                    {videos.length > 0 && <Switch size='sm' colorScheme="red" onChange={handleToggleShowMenu}/>}
+                    {videos.length > 0 && <Switch size='md' colorScheme="red" onChange={handleToggleShowMenu}/>}
                     {showSearchBar && 
                         <Flex
                             align="center"
@@ -79,8 +77,6 @@ function Navbar() {
                                 icon={<ArrowBackIcon boxSize={5} />}
                                 borderRadius='full'
                                 bg='inherit'
-                                // _hover={{ bg: '#434242ff' }}
-                                // _active={{ bg: '#565353ff' }}
                                 onClick={handleToggleSmallScreenSearchBar}
                             />
                             <SmallScreenSearchBar  

@@ -1,4 +1,5 @@
 import { Box, Image, Text, VStack, HStack } from "@chakra-ui/react";
+import { getTimeTaken } from "../../Utils";
 
 function VideoCard({ item, onClick }) {
     let title = item.snippet.title;
@@ -7,13 +8,19 @@ function VideoCard({ item, onClick }) {
         title += "...";
     }
 
+    if(item.id.channelId) {
+        return <></> // it means this item is a channel and not a video so we will not append this item.
+    }
+
     return (
-        <Box onClick={() => onClick(item)} _hover={{cursor: "pointer"}}>
+        <Box>
             <VStack>
                 <Image
                     src={item.snippet.thumbnails.high.url}
                     alt="Thumbnail not available" w="full"
                     borderRadius="xl"
+                    onClick={() => onClick(item)}
+                    _hover={{cursor: "pointer"}}
                 />
 
                 <HStack justify="start" align="start" w="full" px={{base: 5, sm: 0}}>
@@ -21,9 +28,12 @@ function VideoCard({ item, onClick }) {
                         <Image boxSize="full" borderRadius="full" src={item.snippet.thumbnails.default.url} alt="" />
                     </Box>
                     <VStack flex={1} align="start" gap={0}>
-                        <Text>{title}</Text>
+                        <Text
+                            onClick={() => onClick(item)}
+                            _hover={{cursor: "pointer"}}
+                        >{title}</Text>
                         <Text color="whiteAlpha.700" fontSize={{base: "xs", sm: "sm"}}>{item.snippet.channelTitle}</Text>
-                        <Text color="whiteAlpha.700" fontSize={{base: "xs", sm: "sm"}}>{item.snippet.publishTime}</Text>
+                        <Text color="whiteAlpha.700" fontSize={{base: "xs", sm: "sm"}}>{getTimeTaken(item.snippet.publishTime)}</Text>
                     </VStack>
                 </HStack>
             </VStack>

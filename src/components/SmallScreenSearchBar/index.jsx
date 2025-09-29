@@ -67,7 +67,6 @@ function SmallScreenSearchBar({ onClick }) {
                     px={4}
                     borderColor='#222222'
                     borderRadius='0 50px 50px 0'
-                    // _hover={{ bg: '#222222' }}
                     onClick={searchData}
                 />
             </InputRightAddon>
