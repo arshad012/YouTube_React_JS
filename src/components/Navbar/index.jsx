@@ -1,6 +1,6 @@
-import { Box, Button, Flex, Hide, IconButton, Show, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Hide, IconButton, Show, Spacer } from "@chakra-ui/react";
 
-import SidebarButton_logo from "./sidebarButton_logo";
+import SidebarButton_logo from "./SidebarButton_logo";
 import UserInfo from "./UserInfo";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
