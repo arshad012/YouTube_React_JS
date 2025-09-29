@@ -1,3 +1,4 @@
+const API_KEY = import.meta.env.VITE_API_KEY;
 import { Box, Flex, IconButton, Input, InputGroup, InputLeftElement, InputRightAddon } from "@chakra-ui/react"
 import { SearchIcon, Search2Icon } from "@chakra-ui/icons"
 import { useEffect, useRef, useState } from "react"
@@ -40,7 +41,6 @@ function SearchBar() {
         if (!searchQuery) return;
         
         try {
-            const API_KEY = `AIzaSyDaZJFVb6R2-Ek4RyMV8T7DJlwTrEyqlM0`;
             const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${searchQuery}&key=${API_KEY}`);
             const data = await response.json();
             
