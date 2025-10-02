@@ -1,7 +1,9 @@
-import { Box, Image, Text, VStack, HStack } from "@chakra-ui/react";
+import { Box, Image, Text, VStack, HStack, useColorModeValue } from "@chakra-ui/react";
 import { getTimeTaken } from "../../Utils";
 
 function VideoCard({ item, onClick }) {
+    const textColor = useColorModeValue("#6c6c6c", "whiteAlpha.700");
+
     let title = item.snippet.title;
     if(window.innerWidth <= 1030) {
         title = title.slice(0, 50);
@@ -31,9 +33,10 @@ function VideoCard({ item, onClick }) {
                         <Text
                             onClick={() => onClick(item)}
                             _hover={{cursor: "pointer"}}
+                            fontWeight='bold'
                         >{title}</Text>
-                        <Text color="whiteAlpha.700" fontSize={{base: "xs", sm: "sm"}}>{item.snippet.channelTitle}</Text>
-                        <Text color="whiteAlpha.700" fontSize={{base: "xs", sm: "sm"}}>{getTimeTaken(item.snippet.publishTime)}</Text>
+                        <Text color={textColor} fontSize={{base: "xs", sm: "sm"}}>{item.snippet.channelTitle}</Text>
+                        <Text color={textColor} fontSize={{base: "xs", sm: "sm"}}>{getTimeTaken(item.snippet.publishTime)}</Text>
                     </VStack>
                 </HStack>
             </VStack>

@@ -1,4 +1,4 @@
-import { Box, HStack, Text, VStack, Avatar } from "@chakra-ui/react";
+import { Box, HStack, Text, VStack, Avatar, useColorModeValue } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { House, Youtube, Package2 } from 'lucide-react';
 import { youtubeLoggedinUser_localStorage_key } from "../../Utils";
@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { showMenuSmallScreenSelector } from "../../Redux/ShowMenuSmallScreen/selector";
 
 function BottomBar() {
+    const bgColor = useColorModeValue("rgba(255,255,255, 0.9)", "rgba(15, 15, 15, 0.8)");
+
     const { showMenu } = useSelector(showMenuSmallScreenSelector);
     const navigate = useNavigate();
     const youtubeLoggedinUser = JSON.parse(localStorage.getItem(youtubeLoggedinUser_localStorage_key)) ?? {};
@@ -49,14 +51,13 @@ function BottomBar() {
             bottom={showMenu ? "60px" : 0}
             w='100%'
             h='50px'
-            bgColor='rgba(15, 15, 15, 0.7)'
+            bgColor={bgColor}
             backdropFilter='blur(20px)'
             py={1}
             transition="all 0.2s"
         >
             <HStack 
                 boxSize="full"
-                color={"white"}
                 justify="space-around"
                 align="center"
                 px="30px"

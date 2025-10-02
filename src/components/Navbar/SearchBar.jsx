@@ -1,5 +1,5 @@
 const API_KEY = import.meta.env.VITE_API_KEY;
-import { Box, Flex, IconButton, Input, InputGroup, InputLeftElement, InputRightAddon } from "@chakra-ui/react"
+import { Box, Flex, IconButton, Input, InputGroup, InputLeftElement, InputRightAddon, useColorModeValue, useColorMode } from "@chakra-ui/react"
 import { SearchIcon, Search2Icon } from "@chakra-ui/icons"
 import { useEffect, useRef, useState } from "react"
 import { HiMiniMicrophone } from "react-icons/hi2";
@@ -13,6 +13,12 @@ import { useNavigate } from "react-router-dom";
 import { searchedDataSelector } from "../../Redux/searchedData/selector";
 
 function SearchBar() {
+    const { colorMode } = useColorMode();
+    const bgColor = useColorModeValue("#e8e3e2", "#303030");
+    const textColor = useColorModeValue("black", "white");
+    const menuHover = useColorModeValue("#d8d4d3ff", "#434242ff");
+    const menuActive = useColorModeValue("#c7c3c2ff", "#565353ff");
+    
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { searchQuery } = useSelector(searchQuerySelector);
@@ -52,19 +58,19 @@ function SearchBar() {
     }
 
     return (
-        <Box w={{ base: '300px', sm: '500px', lg: '650px' }} h='full' color='white'>
+        <Box w={{ base: '300px', sm: '500px', lg: '650px' }} h='full' color={textColor}>
             <Flex boxSize='full' alignItems='center' gap={{ sm: 2, md: 3, lg: 4 }}>
                 <InputGroup>
                     {inputFocus &&
                         <InputLeftElement pointerEvents='none'>
-                            <SearchIcon color='gray.300' />
+                            <SearchIcon color={colorMode === "light" ? "black" : "gray.300"} />
                         </InputLeftElement>
                     }
                     <Input
                         placeholder='Search'
-                        border='2px'
+                        border='1px'
                         borderRadius='full'
-                        borderColor='#303030'
+                        borderColor={colorMode === "light" ? "gray.500" : "#303030"}
                         value={searchQuery}
                         ref={inputRef}
                         onFocus={() => setInputFocus(true)}
@@ -72,16 +78,20 @@ function SearchBar() {
                         onChange={handleChange}
                         onKeyDown={handleKeyDown}
                     />
-                    <InputRightAddon bg='inherit' borderColor='#222222' borderRadius='0 50px 50px 0' px={0}>
+
+                    <InputRightAddon 
+                        bg='inherit' 
+                        borderRadius='0 50px 50px 0' 
+                        px={0}
+                    >
                         <IconButton
                             aria-label='microphone'
-                            color='white'
-                            icon={<Search2Icon color='white' boxSize={5} />}
-                            bg='#222222'
-                            px={6}
-                            borderColor='#222222'
+                            icon={<Search2Icon color={textColor} boxSize={5} />}
                             borderRadius='0 50px 50px 0'
-                            _hover={{ bg: '#222222' }}
+                            px={6}
+                            bg={bgColor}
+                            _hover={{ bg: menuHover }}
+                            _active={{ bg: menuActive }}
                             onClick={searchData}
                         />
                     </InputRightAddon>
@@ -90,13 +100,16 @@ function SearchBar() {
                 <Box>
                     <IconButton
                         aria-label='microphone'
-                        color='white'
+                        color={textColor}
                         icon={<HiMiniMicrophone size={22} />}
                         borderRadius='full'
-                        bg='#222222'
-                        borderColor='#222222'
-                        _hover={{ bg: '#434242ff' }}
-                        _active={{ bg: '#565353ff' }}
+                        // borderColor='#222222'
+                        // bg='#222222'
+                        // _hover={{ bg: '#434242ff' }}
+                        // _active={{ bg: '#565353ff' }}
+                        bg={bgColor}
+                        _hover={{ bg: menuHover }}
+                        _active={{ bg: menuActive }}
                     />
                 </Box>
             </Flex>

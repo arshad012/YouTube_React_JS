@@ -1,10 +1,23 @@
-import { Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, Image, Text, useColorModeValue, useColorMode } from "@chakra-ui/react";
 import { TriangleUpIcon } from '@chakra-ui/icons';
 import { useSelector } from "react-redux";
 import { searchedDataSelector } from "../../Redux/searchedData/selector";
 
 function MiniVideoCard({ item, onClick }) {
     const { clickedVideoDetails } = useSelector(searchedDataSelector);
+
+    const bgHover = useColorModeValue("#f2efefff", "#212121");
+    const textColor = useColorModeValue("black", "white");
+    const { colorMode } = useColorMode();
+    
+    let selectedItemBg = "";
+    if(item.id.videoId === clickedVideoDetails.id.videoId && colorMode === "light") {
+        selectedItemBg = "#dfdbdbff";
+    }
+    if(item.id.videoId === clickedVideoDetails.id.videoId && colorMode === "dark") {
+        selectedItemBg = "#3a3838ff";
+    }
+    // const bgColor = useSelector()
 
     let title = item.snippet.title ?? "";
     const limit = 60;
@@ -20,15 +33,16 @@ function MiniVideoCard({ item, onClick }) {
     return (
         <HStack
             onClick={() => onClick(item)}
-            _hover={{ bgColor: "#212121", cursor: "pointer" }}
+            _hover={{ bgColor: bgHover, cursor: "pointer" }}
             justify="start"
             p={2}
             w="full"
-            bgColor={item.id.videoId === clickedVideoDetails.id.videoId ? "#3a3838ff" : ""}
+            // bgColor={selectedItem && colorMode === "light" ?  "#ffffff" : "#3a3838ff"}
+            bgColor={selectedItemBg}
         >
             <Box justify="center" align="center" w={{base: "10px", xl: "15px"}}>
                 {item.id.videoId === clickedVideoDetails.id.videoId &&
-                    <TriangleUpIcon boxSize={3} transform="rotate(90deg)" />
+                    <TriangleUpIcon boxSize={3} transform="rotate(90deg)" color={textColor} />
                 }
             </Box>
 

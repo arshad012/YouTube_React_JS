@@ -1,4 +1,4 @@
-import { Box, Flex, Hide, IconButton, Show, Spacer, Switch } from "@chakra-ui/react";
+import { Box, Flex, Hide, IconButton, MenuButton, Show, Spacer, Switch, useColorModeValue, Menu, Avatar, MenuList, MenuItem, Text, useColorMode } from "@chakra-ui/react";
 
 import SidebarButton_logo from "./SidebarButton_logo";
 import UserInfo from "./UserInfo";
@@ -8,12 +8,22 @@ import SmallScreenSearchBar from "../SmallScreenSearchBar";
 import { Search2Icon, ArrowBackIcon } from "@chakra-ui/icons";
 import { toggleShowMenu } from '../../Redux/ShowMenuSmallScreen/slice';
 import { useDispatch, useSelector } from "react-redux";
+import { showMenuSmallScreenSelector } from "../../Redux/ShowMenuSmallScreen/selector";
 import { searchedDataSelector } from "../../Redux/searchedData/selector";
+import { youtubeLoggedinUser_localStorage_key } from "../../Utils";
 
 function Navbar() {
+    const { colorMode, toggleColorMode } = useColorMode();
+    const bottombarBgColor = useColorModeValue("rgba(255,255,255, 0.9)", "rgba(15, 15, 15, 0.8)");
+    const bgColor = useColorModeValue("#ffffff", "#0f0f0f");
+    const textColor = useColorModeValue("black", "white");
+    const menuHover = useColorModeValue("#d8d4d3ff", "#434242ff");
+
     const [showSearchBar, setShowSearchBar] = useState(false);
     const dispatch = useDispatch();
     const { videos } = useSelector(searchedDataSelector);
+    const { showMenu } = useSelector(showMenuSmallScreenSelector);
+    const youtubeLoggedinUser = JSON.parse(localStorage.getItem(youtubeLoggedinUser_localStorage_key)) ?? {};
 
     const handleToggleSmallScreenSearchBar = () => {
         setShowSearchBar(prev => !prev);
@@ -25,7 +35,7 @@ function Navbar() {
 
     return (
         <Box
-            bgColor='rgba(15, 15, 15, 0.7)'
+            bottombarBgColor={bottombarBgColor}
             backdropFilter='blur(20px)'
             h='60px'
             w='100%'
@@ -50,14 +60,51 @@ function Navbar() {
 
                 <Show breakpoint='(max-width: 750px)'>
                     <IconButton
-                        color='white'
                         icon={<Search2Icon boxSize={4} />}
                         borderRadius='full'
                         bg='inherit'
                         onClick={() => setShowSearchBar(prev => !prev)}
                     />
-                    {videos.length > 0 && <Switch size='md' colorScheme="red" onChange={handleToggleShowMenu}/>}
-                    {showSearchBar && 
+                    <Menu>
+                        <MenuButton>
+                            <Avatar size='sm' src={youtubeLoggedinUser?.image} />
+                        </MenuButton>
+
+                        <MenuList bg={bgColor} border='none'>
+                            <Text
+                                color={textColor}
+                                px={5}
+                                py={2}
+                                borderBottom='1px'
+                                borderBottomWidth='2px'
+                            >
+                                Profile
+                            </Text>
+
+                            <MenuItem
+                                onClick={toggleColorMode}
+                                bg={bgColor}
+                                color={textColor}
+                                _hover={{ bg: menuHover }}
+                            >
+                                Appearece: {colorMode === "light" ? "Dark" : "Light"}
+                            </MenuItem>
+                            
+                            {videos.length > 0 &&
+                                <MenuItem
+                                    disabled={true}
+                                    onClick={handleToggleShowMenu}
+                                    bg={bgColor}
+                                    color={textColor}
+                                    _hover={{ bg: menuHover }}
+                                >
+                                    {showMenu ? "Hide menu" : "Show menu"}
+                                </MenuItem>
+                            }
+                        </MenuList>
+                    </Menu>
+
+                    {showSearchBar &&
                         <Flex
                             align="center"
                             position='absolute'
@@ -68,18 +115,16 @@ function Navbar() {
                             pl={{ base: 1, lg: 5 }}
                             pr={{ base: 2, lg: 7 }}
                             zIndex={2000}
-                            bg="#0f0f0f"
+                            bg={bgColor}
                             gap={1}
-                            color="white"
                         >
                             <IconButton
-                                color='white'
-                                icon={<ArrowBackIcon boxSize={5} />}
+                                icon={<ArrowBackIcon boxSize={5} color={textColor} />}
                                 borderRadius='full'
                                 bg='inherit'
                                 onClick={handleToggleSmallScreenSearchBar}
                             />
-                            <SmallScreenSearchBar  
+                            <SmallScreenSearchBar
                                 onClick={handleToggleSmallScreenSearchBar}
                             />
                         </Flex>

@@ -1,16 +1,18 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, useColorModeValue } from "@chakra-ui/react";
 import HeightFiller from "../HeightFiller";
 
 function EmptyPage() {
+    const bgColor = useColorModeValue("#e8e3e2", "#303030");
+    const textColor = useColorModeValue("black", "white");
     return (
         <Box>
             <HeightFiller />
             <Text
-                color="white"
+                color={textColor}
                 textAlign="center"
                 fontSize={{base: "xl", md: "4xl"}}
                 w={{base: "80%", sm: "60%"}}
-                bgColor='#303030'
+                bgColor={bgColor}
                 m="auto"
                 h="fit-content"
                 py={10}

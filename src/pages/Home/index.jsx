@@ -26,7 +26,6 @@ function Home() {
     return (
         <Box
             maxH='100%'
-            color={'white'}
             py={2}
             overflowY="scroll"
             paddingX={{ base: 0, sm: 5, lg: 10 }}

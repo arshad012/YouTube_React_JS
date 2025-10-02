@@ -1,4 +1,4 @@
-import { Box, Text, VStack, Flex, HStack, Image, Show } from "@chakra-ui/react";
+import { Box, Text, VStack, Flex, HStack, Image, Show, useColorModeValue, useColorMode } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
 import HeightFiller from "../../components/HeightFiller";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,6 +15,11 @@ import { getTimeTaken } from "../../Utils";
 
 
 function Watch() {
+  const { colorMode } = useColorMode();
+  const textColor = useColorModeValue("#6c6c6c", "whiteAlpha.700");
+  const bgColor = useColorModeValue("#e8e3e2", "#303030");
+  const borderColor = useColorModeValue("gray.500", "whiteAlpha.700");
+
   const dispatch = useDispatch();
   const videoRef = useRef(null);
   const containerRef = useRef(null);
@@ -48,7 +53,6 @@ function Watch() {
   return (
     <Box
       maxH='100%'
-      color={'white'}
       py={2}
       overflowY="scroll"
       paddingX={{ base: 0, sm: "20px", md: "30px", lg: "40px", xl: "80px" }}
@@ -90,7 +94,11 @@ function Watch() {
                 </Box>
                 <Text>{clickedVideoDetails.snippet.channelTitle} <CheckCircleIcon color="whiteAlpha.700" boxSize={3} /></Text>
               </HStack>
-              <Text fontSize={{base: "xs"}} mt={2}>{getTimeTaken(clickedVideoDetails.snippet.publishTime)}</Text>
+              <Text 
+                fontSize={{base: "xs", sm: "sm"}} 
+                mt={2}
+                color={textColor}
+              >{getTimeTaken(clickedVideoDetails.snippet.publishTime)}</Text>
             </Box>
 
           </VStack>
@@ -105,23 +113,23 @@ function Watch() {
           m="auto"
           borderRadius="2xl"
           overflow="hidden"
-          borderColor="whiteAlpha.700"
+          borderColor={borderColor}
           borderWidth={1}
           h="500px"
           mt={0}
         >
           <Box
             minH="100px"
-            bgColor="#212121"
+            bgColor={bgColor}
             p={3}
           >
             <Text fontSize="lg" fontWeight="bold">{playingVideoTitle}</Text>
-            <Text color="whiteAlpha.700">{clickedVideoDetails?.snippet?.channelTitle}</Text>
+            <Text color={textColor}>{clickedVideoDetails?.snippet?.channelTitle}</Text>
           </Box>
 
           <VStack
             className="scrollbar-hide"
-            bgColor="#0f0f0f"
+            bgColor={colorMode === "light" ? "#ffffff" : "#0f0f0f"}
             flex={1}
             overflowY="scroll"
           >

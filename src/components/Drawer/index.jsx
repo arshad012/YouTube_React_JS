@@ -1,11 +1,11 @@
-import { Box } from '@chakra-ui/react'
-import { HamburgerIcon } from '@chakra-ui/icons';
+import { Box, useColorMode } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux';
 import { sidebarStateSelector } from '../../Redux/YoutubeSidebar/selector';
 import { toggleSidebar } from '../../Redux/YoutubeSidebar/slice';
 import "./youtubeDrawer.css";
 
 function YoutubeDrawer() {
+    const { colorMode } = useColorMode();
     const dispatch = useDispatch();
     const { isSidebarOpen } = useSelector(sidebarStateSelector);
 
@@ -43,7 +43,7 @@ function YoutubeDrawer() {
                     left="0"
                     overflowX="hidden"
                     overflowY="scroll"
-                    bgColor='#222121ff'
+                    bgColor={colorMode === "light" ? "#f7f3f3ff" : "#222121ff"}
                     className='scrollbar-hide'
                 >
                     <Box

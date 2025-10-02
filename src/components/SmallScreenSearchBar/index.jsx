@@ -1,5 +1,5 @@
 import { Search2Icon } from '@chakra-ui/icons';
-import { IconButton, Input, InputGroup, InputRightAddon } from '@chakra-ui/react';
+import { IconButton, Input, InputGroup, InputRightAddon, useColorModeValue } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchQuerySelector } from '../../Redux/SearchQuery/selector';
@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { updateSearchedData } from '../../Redux/searchedData/slice';
 
 function SmallScreenSearchBar({ onClick }) {
+    const bgColor = useColorModeValue("#e8e3e2", "#303030"); // #222222
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [inputFocus, setInputFocus] = useState(false);
@@ -51,7 +53,6 @@ function SmallScreenSearchBar({ onClick }) {
                 placeholder='Search'
                 border='2px'
                 borderRadius='full'
-                borderColor='#303030'
                 value={searchQuery}
                 ref={inputRef}
                 onFocus={() => setInputFocus(true)}
@@ -59,13 +60,11 @@ function SmallScreenSearchBar({ onClick }) {
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
             />
-            <InputRightAddon bg='inherit' borderColor='#222222' borderRadius='0 50px 50px 0' px={0}>
+            <InputRightAddon bg='inherit' borderRadius='0 50px 50px 0' px={0}>
                 <IconButton
-                    color='white'
-                    icon={<Search2Icon color='white' boxSize={4} />}
-                    bg='#222222'
+                    icon={<Search2Icon boxSize={4} />}
+                    bg={bgColor}
                     px={4}
-                    borderColor='#222222'
                     borderRadius='0 50px 50px 0'
                     onClick={searchData}
                 />

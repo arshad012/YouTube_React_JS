@@ -1,8 +1,10 @@
-import { Box, VStack, Image, HStack, Text, Flex, Hide, Show } from "@chakra-ui/react";
+import { Box, VStack, Image, HStack, Text, Flex, Hide, Show, useColorModeValue } from "@chakra-ui/react";
 import { getTimeTaken } from "../../Utils";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 
 function WatchPageVideoCard({ item, onClick }) {
+    const textColor = useColorModeValue("#6c6c6c", "whiteAlpha.700");
+
     let title = item.snippet.title;
     if (window.innerWidth <= 1030) {
         title = title.slice(0, 50);
@@ -36,7 +38,6 @@ function WatchPageVideoCard({ item, onClick }) {
                         <VStack justify="start" align="start" px={{ base: 5, sm: 0 }}>
 
                             <Text
-                                color="white"
                                 fontSize={{ base: "xs", md: "md", lg: "lg" }}
                                 fontWeight="bold"
                                 onClick={() => onClick(item)}
@@ -44,7 +45,7 @@ function WatchPageVideoCard({ item, onClick }) {
                             >{item.snippet.title}</Text>
 
                             <Text
-                                color="whiteAlpha.700"
+                                color={textColor}
                                 fontSize={{ base: "xs", sm: "sm" }}
                             >{getTimeTaken(item.snippet.publishTime)}</Text>
 
@@ -52,10 +53,10 @@ function WatchPageVideoCard({ item, onClick }) {
                                 <Box h="40px" w="40px" mt={1}>
                                     <Image boxSize="full" borderRadius="full" src={item.snippet.thumbnails.default.url} alt="" />
                                 </Box>
-                                <Text color="whiteAlpha.700" fontSize={{ base: "xs", sm: "sm" }}>{item.snippet.channelTitle} <CheckCircleIcon color="whiteAlpha.700" boxSize={3} ml={1} /></Text>
+                                <Text color={textColor} fontSize={{ base: "xs", sm: "sm" }}>{item.snippet.channelTitle} <CheckCircleIcon color="whiteAlpha.700" boxSize={3} ml={1} /></Text>
                             </Flex>
 
-                            <Text color="whiteAlpha.700" fontSize={{ base: "xs", sm: "sm" }}>{item.snippet.description}</Text>
+                            <Text color={textColor} fontSize={{ base: "xs", sm: "sm" }}>{item.snippet.description}</Text>
                         </VStack>
                     </Box>
                 </Hide>
