@@ -35,7 +35,7 @@ function BottomBar() {
         {
             id: "you",
             label: "You",
-            path: "you",
+            path: "/you",
             icon: <Avatar size='xs' src={youtubeLoggedinUser?.image} />
         },
     ];

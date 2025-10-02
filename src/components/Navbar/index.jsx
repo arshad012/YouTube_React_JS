@@ -1,11 +1,11 @@
 import { Box, Flex, Hide, IconButton, MenuButton, Show, Spacer, Switch, useColorModeValue, Menu, Avatar, MenuList, MenuItem, Text, useColorMode } from "@chakra-ui/react";
+import { Search2Icon, ArrowBackIcon, DragHandleIcon } from "@chakra-ui/icons";
 
 import SidebarButton_logo from "./SidebarButton_logo";
 import UserInfo from "./UserInfo";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import SmallScreenSearchBar from "../SmallScreenSearchBar";
-import { Search2Icon, ArrowBackIcon } from "@chakra-ui/icons";
 import { toggleShowMenu } from '../../Redux/ShowMenuSmallScreen/slice';
 import { useDispatch, useSelector } from "react-redux";
 import { showMenuSmallScreenSelector } from "../../Redux/ShowMenuSmallScreen/selector";
@@ -64,11 +64,16 @@ function Navbar() {
                         borderRadius='full'
                         bg='inherit'
                         onClick={() => setShowSearchBar(prev => !prev)}
+                        _hover={{bg: ""}}
+                        _active={{bg: ""}}
                     />
                     <Menu>
-                        <MenuButton>
-                            <Avatar size='sm' src={youtubeLoggedinUser?.image} />
-                        </MenuButton>
+                        <MenuButton
+                            as={IconButton}
+                            borderRadius='full'
+                            bg='inherit'
+                            _hover={{bg: ""}}
+                            icon={<DragHandleIcon boxSize={4} color={textColor} />} />
 
                         <MenuList bg={bgColor} border='none'>
                             <Text
@@ -89,7 +94,7 @@ function Navbar() {
                             >
                                 Appearece: {colorMode === "light" ? "Dark" : "Light"}
                             </MenuItem>
-                            
+
                             {videos.length > 0 &&
                                 <MenuItem
                                     disabled={true}
@@ -122,6 +127,8 @@ function Navbar() {
                                 icon={<ArrowBackIcon boxSize={5} color={textColor} />}
                                 borderRadius='full'
                                 bg='inherit'
+                                _hover={{bg: ""}}
+                                _active={{bg: ""}}
                                 onClick={handleToggleSmallScreenSearchBar}
                             />
                             <SmallScreenSearchBar

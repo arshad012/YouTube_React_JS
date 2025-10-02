@@ -1,22 +1,24 @@
-import { Box, Heading, Text, Button, VStack } from "@chakra-ui/react";
+import { Box, Heading, Text, Button, VStack, Show } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import BottomBar from "../../components/BottomBar";
+import HeightFiller from "../../components/HeightFiller";
 
 function NotFound() {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate("/", {replace: true});
+        navigate("/", { replace: true });
     }
 
     return (
         <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            minH="100vh"
-            bg="gray.900"
-            color="white"
-            px={6}
+            display="grid"
+            // justifyContent="center"
+            // alignItems="center"
+            placeContent="center"
+            h="100vh"
+            w="100%"
+            // px={6}
         >
             <VStack spacing={6} textAlign="center">
                 <Heading fontSize={{ base: "6xl", md: "9xl" }} color="red.400">
@@ -34,6 +36,12 @@ function NotFound() {
                     Go Back Home
                 </Button>
             </VStack>
+
+            <Show breakpoint='(max-width: 750px)'>
+                <BottomBar />
+            </Show>
+
+            <HeightFiller />
         </Box>
     );
 }
