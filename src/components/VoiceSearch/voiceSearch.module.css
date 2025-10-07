@@ -1,0 +1,23 @@
+
+.pulse {
+    background-color: red;
+    border-radius: 50%;
+    padding: 20px;
+    transition: all 0.2s;
+    /* animation-name: pulse; */
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: red;
+    }
+    50% {
+        background-color: rgb(210, 122, 122);
+    }
+    100% {
+        background-color: red;
+    }
+}

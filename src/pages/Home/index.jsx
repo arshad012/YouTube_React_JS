@@ -7,12 +7,23 @@ import { useNavigate } from "react-router-dom";
 import { updateClickedVideoDetails } from "../../Redux/searchedData/slice";
 import EmptyPage from "../../components/EmptyPage";
 import BottomBar from "../../components/BottomBar";
-import { getTimeTaken } from "../../Utils";
+import { useEffect, useRef } from "react";
 
 function Home() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { videos } = useSelector(searchedDataSelector);
+    const containerRef = useRef(null);
+    const isFirstRun = useRef(true);
+
+    useEffect(() => {
+        if(isFirstRun.current) {
+            isFirstRun.current = false;
+            return;
+        }
+        
+        containerRef.current.scrollTo({ top: 0 });
+    }, [videos]);
 
     const handleVideoClick = (videoDetails) => {
         dispatch(updateClickedVideoDetails(videoDetails));
@@ -29,6 +40,7 @@ function Home() {
             py={2}
             overflowY="scroll"
             paddingX={{ base: 0, sm: 5, lg: 10 }}
+            ref={containerRef}
         >
             <HeightFiller />
 

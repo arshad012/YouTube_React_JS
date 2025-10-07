@@ -21,16 +21,11 @@ function Watch() {
   const borderColor = useColorModeValue("gray.500", "whiteAlpha.700");
 
   const dispatch = useDispatch();
-  const videoRef = useRef(null);
   const containerRef = useRef(null);
   const { clickedVideoDetails, videos } = useSelector(searchedDataSelector);
   const [searchParams, setSearchParams] = useSearchParams();
   const v = searchParams.get("v") ?? "";
   const windowWidth = window.innerWidth;
-
-  useEffect(() => {
-    videoRef.current.focus();
-  }, [])
 
   const smallDataSlice = videos.slice(0, 20);
 
@@ -61,6 +56,7 @@ function Watch() {
     >
       <HeightFiller />
 
+      {/* Top part */}
       <Flex
         gap={{ base: "50px", lg: "15px", xl: "30px", "2xl": "50px" }}
         mt={{base: 0, md: 5}} 
@@ -70,7 +66,7 @@ function Watch() {
         {clickedVideoDetails?.kind &&
         // 1st child
           <VStack w={{ base: "full", lg: "67%" }} h="fit-content" align="start">
-            <Box w="100%" h="fit-content" borderRadius="2xl" overflow="hidden" ref={videoRef}>
+            <Box w="100%" h="fit-content" borderRadius="2xl" overflow="hidden">
               <iframe
                 width="100%"
                 height={windowWidth < 600 ? "350" : "500"}
@@ -144,6 +140,8 @@ function Watch() {
         </Flex>
 
       </Flex>
+
+      {/* Below part */}
 
       <VStack 
         mt={20} 

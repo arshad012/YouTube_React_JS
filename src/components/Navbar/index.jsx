@@ -4,7 +4,7 @@ import { Search2Icon, ArrowBackIcon, DragHandleIcon } from "@chakra-ui/icons";
 import SidebarButton_logo from "./SidebarButton_logo";
 import UserInfo from "./UserInfo";
 import SearchBar from "./SearchBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SmallScreenSearchBar from "../SmallScreenSearchBar";
 import { toggleShowMenu } from '../../Redux/ShowMenuSmallScreen/slice';
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +25,10 @@ function Navbar() {
     const { showMenu } = useSelector(showMenuSmallScreenSelector);
     const youtubeLoggedinUser = JSON.parse(localStorage.getItem(youtubeLoggedinUser_localStorage_key)) ?? {};
 
+    useEffect(() => {
+        handleToggleSmallScreenSearchBar();
+    }, [videos]);
+
     const handleToggleSmallScreenSearchBar = () => {
         setShowSearchBar(prev => !prev);
     }
@@ -35,7 +39,7 @@ function Navbar() {
 
     return (
         <Box
-            bottombarBgColor={bottombarBgColor}
+            bg={bottombarBgColor}
             backdropFilter='blur(20px)'
             h='60px'
             w='100%'
@@ -64,15 +68,15 @@ function Navbar() {
                         borderRadius='full'
                         bg='inherit'
                         onClick={() => setShowSearchBar(prev => !prev)}
-                        _hover={{bg: ""}}
-                        _active={{bg: ""}}
+                        _hover={{ bg: "" }}
+                        _active={{ bg: "" }}
                     />
                     <Menu>
                         <MenuButton
                             as={IconButton}
                             borderRadius='full'
                             bg='inherit'
-                            _hover={{bg: ""}}
+                            _hover={{ bg: "" }}
                             icon={<DragHandleIcon boxSize={4} color={textColor} />} />
 
                         <MenuList bg={bgColor} border='none'>
@@ -110,31 +114,7 @@ function Navbar() {
                     </Menu>
 
                     {showSearchBar &&
-                        <Flex
-                            align="center"
-                            position='absolute'
-                            top='0'
-                            left='0'
-                            h='60px'
-                            w='100%'
-                            pl={{ base: 1, lg: 5 }}
-                            pr={{ base: 2, lg: 7 }}
-                            zIndex={2000}
-                            bg={bgColor}
-                            gap={1}
-                        >
-                            <IconButton
-                                icon={<ArrowBackIcon boxSize={5} color={textColor} />}
-                                borderRadius='full'
-                                bg='inherit'
-                                _hover={{bg: ""}}
-                                _active={{bg: ""}}
-                                onClick={handleToggleSmallScreenSearchBar}
-                            />
-                            <SmallScreenSearchBar
-                                onClick={handleToggleSmallScreenSearchBar}
-                            />
-                        </Flex>
+                        <SmallScreenSearchBar onClick={handleToggleSmallScreenSearchBar} />
                     }
                 </Show>
             </Flex>

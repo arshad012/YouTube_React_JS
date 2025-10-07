@@ -1,18 +1,20 @@
-import { Search2Icon } from '@chakra-ui/icons';
-import { IconButton, Input, InputGroup, InputRightAddon, useColorModeValue } from '@chakra-ui/react';
+import { ArrowBackIcon, Search2Icon } from '@chakra-ui/icons';
+import { IconButton, Input, InputGroup, InputRightAddon, useColorModeValue, InputRightElement, Box, HStack, useColorMode } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchQuerySelector } from '../../Redux/SearchQuery/selector';
 import { updateSearchQuery } from '../../Redux/SearchQuery/slice';
 import { useNavigate } from 'react-router-dom';
 import { updateSearchedData } from '../../Redux/searchedData/slice';
+import { fetchData } from '../FetchData';
+import NavbarMicrophone from '../Microphone';
 
 function SmallScreenSearchBar({ onClick }) {
-    const bgColor = useColorModeValue("#e8e3e2", "#303030"); // #222222
+    const { colorMode } = useColorMode();
+    const bgColor = useColorModeValue("#ffffff", "#0f0f0f");
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [inputFocus, setInputFocus] = useState(false);
     const inputRef = useRef(null);
     const { searchQuery } = useSelector(searchQuerySelector);
 
@@ -34,42 +36,65 @@ function SmallScreenSearchBar({ onClick }) {
     const searchData = async () => {
         if (!searchQuery) return;
 
-        try {
-            const API_KEY = `AIzaSyDaZJFVb6R2-Ek4RyMV8T7DJlwTrEyqlM0`;
-            const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${searchQuery}&key=${API_KEY}`);
-            const data = await response.json();
-
-            onClick();
+        const result = await fetchData(searchQuery);
+        if (result.success) {
+            dispatch(updateSearchedData(result.data));
             navigate("/");
-            dispatch(updateSearchedData(data));
-        } catch (error) {
-            console.log('error occured while fetching videos:', error);
+        } else {
+            alert('Something went wrong, please try again');
         }
     }
 
     return (
-        <InputGroup>
-            <Input
-                placeholder='Search'
-                border='2px'
-                borderRadius='full'
-                value={searchQuery}
-                ref={inputRef}
-                onFocus={() => setInputFocus(true)}
-                onBlur={() => setInputFocus(false)}
-                onChange={handleChange}
-                onKeyDown={handleKeyDown}
-            />
-            <InputRightAddon bg='inherit' borderRadius='0 50px 50px 0' px={0}>
+        <Box
+            align="center"
+            position='absolute'
+            top='0'
+            left='0'
+            h='60px'
+            w='100%'
+            pl={{ base: 1, lg: 5 }}
+            pr={{ base: 2, lg: 7 }}
+            zIndex={2000}
+            bg={bgColor}
+        >
+            <HStack boxSize="full" gap={0}>
+                {/* First child */}
                 <IconButton
-                    icon={<Search2Icon boxSize={4} />}
-                    bg={bgColor}
-                    px={4}
-                    borderRadius='0 50px 50px 0'
-                    onClick={searchData}
+                    icon={<ArrowBackIcon boxSize={5} />}
+                    borderRadius='full'
+                    bg='inherit'
+                    _hover={{ bg: "" }}
+                    _active={{ bg: "" }}
+                    onClick={onClick}
                 />
-            </InputRightAddon>
-        </InputGroup>
+
+                {/* Second child */}
+                <InputGroup>
+                    <Input
+                        placeholder='Search'
+                        border='1px'
+                        borderRadius='full'
+                        value={searchQuery}
+                        ref={inputRef}
+                        onChange={handleChange}
+                        onKeyDown={handleKeyDown}
+                    />
+                    <InputRightElement>
+                        <IconButton
+                            icon={<Search2Icon boxSize={4} />}
+                            bg="inherit"
+                            onClick={searchData}
+                            _hover={{ bg: "" }}
+                            _active={{ bg: "" }}
+                        />
+                    </InputRightElement>
+                </InputGroup>
+
+                {/* Third child */}
+                <NavbarMicrophone />
+            </HStack>
+        </Box>
     )
 }
 

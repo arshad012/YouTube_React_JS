@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Box, useColorMode } from "@chakra-ui/react"
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 
 import Navbar from './components/Navbar';
 import Home from './pages/Home'
@@ -14,6 +14,8 @@ import YoutubeDrawer from './components/Drawer';
 import { Store } from './Redux';
 import NotFound from './pages/NotFound';
 
+import RestComponents from './components/restComponents';
+
 function App() {
   const { colorMode } = useColorMode();
 
@@ -21,6 +23,8 @@ function App() {
     <Box position='relative' h='100vh' bgColor={colorMode === "light" ? "#ffffff" : "#0f0f0f"}>
       <Provider store={Store}>
         <YoutubeDrawer />
+        
+        <RestComponents />
         {/*  */}
         <BrowserRouter>
           <Navbar />

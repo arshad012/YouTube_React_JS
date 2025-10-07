@@ -1,16 +1,15 @@
-const API_KEY = import.meta.env.VITE_API_KEY;
 import { Box, Flex, IconButton, Input, InputGroup, InputLeftElement, InputRightAddon, useColorModeValue, useColorMode } from "@chakra-ui/react"
 import { SearchIcon, Search2Icon } from "@chakra-ui/icons"
 import { useEffect, useRef, useState } from "react"
-import { HiMiniMicrophone } from "react-icons/hi2";
 import { useSelector, useDispatch } from "react-redux";
 
 import { searchQuerySelector } from "../../Redux/SearchQuery/selector";
 import { updateSearchQuery } from "../../Redux/SearchQuery/slice";
 import { updateSearchedData } from "../../Redux/searchedData/slice";
 import { useNavigate } from "react-router-dom";
-
 import { searchedDataSelector } from "../../Redux/searchedData/selector";
+import NavbarMicrophone from "../Microphone";
+import { fetchData } from "../FetchData";
 
 function SearchBar() {
     const { colorMode } = useColorMode();
@@ -45,18 +44,17 @@ function SearchBar() {
 
     const searchData = async () => {
         if (!searchQuery) return;
-        
-        try {
-            const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${searchQuery}&key=${API_KEY}`);
-            const data = await response.json();
+
+        const result = await fetchData(searchQuery);
+        if(result.success) {
+            dispatch(updateSearchedData(result.data));
+            navigate("/");
             
-            // navigate("/");
-            dispatch(updateSearchedData(data));
-        } catch (error) {
-            console.log('error occured while fetching videos:', error);
+        } else {
+            alert('Something went wrong, please try again');
         }
     }
-
+    
     return (
         <Box w={{ base: '300px', sm: '500px', lg: '650px' }} h='full' color={textColor}>
             <Flex boxSize='full' alignItems='center' gap={{ sm: 2, md: 3, lg: 4 }}>
@@ -85,7 +83,7 @@ function SearchBar() {
                         px={0}
                     >
                         <IconButton
-                            aria-label='microphone'
+                            aria-label='Search2Icon'
                             icon={<Search2Icon color={textColor} boxSize={5} />}
                             borderRadius='0 50px 50px 0'
                             px={6}
@@ -98,19 +96,7 @@ function SearchBar() {
                 </InputGroup>
 
                 <Box>
-                    <IconButton
-                        aria-label='microphone'
-                        color={textColor}
-                        icon={<HiMiniMicrophone size={22} />}
-                        borderRadius='full'
-                        // borderColor='#222222'
-                        // bg='#222222'
-                        // _hover={{ bg: '#434242ff' }}
-                        // _active={{ bg: '#565353ff' }}
-                        bg={bgColor}
-                        _hover={{ bg: menuHover }}
-                        _active={{ bg: menuActive }}
-                    />
+                    <NavbarMicrophone />
                 </Box>
             </Flex>
         </Box>

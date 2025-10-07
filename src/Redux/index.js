@@ -4,12 +4,14 @@ import searchQuerySlice from './SearchQuery/slice';
 import YoutubeSidebarSlice from './YoutubeSidebar/slice';
 import searchedDataSlice from './searchedData/slice';
 import ShowMenuSmallScreenSlice from './ShowMenuSmallScreen/slice';
+import SearchRecognitionSlice from './SearchRecognition/slice';
 
 export const Store = configureStore({
     reducer: {
         searchQuery: searchQuerySlice,
         sidebarState: YoutubeSidebarSlice,
         searchedData: searchedDataSlice,
-        ShowMenuSmallScreen: ShowMenuSmallScreenSlice
+        ShowMenuSmallScreen: ShowMenuSmallScreenSlice,
+        SearchRecognition: SearchRecognitionSlice
     }
 })

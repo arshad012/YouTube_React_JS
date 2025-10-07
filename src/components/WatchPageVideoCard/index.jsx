@@ -38,7 +38,7 @@ function WatchPageVideoCard({ item, onClick }) {
                         <VStack justify="start" align="start" px={{ base: 5, sm: 0 }}>
 
                             <Text
-                                fontSize={{ base: "xs", md: "md", lg: "lg" }}
+                                fontSize={{ base: "xs", sm: "sm", lg: "lg" }}
                                 fontWeight="bold"
                                 onClick={() => onClick(item)}
                                 _hover={{ cursor: "pointer" }}
