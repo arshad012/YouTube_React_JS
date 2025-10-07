@@ -1,7 +1,7 @@
 import { Box, Center, HStack, IconButton, Text, VStack, useColorModeValue, Spacer, CloseButton, grid } from "@chakra-ui/react";
 import { HiMiniMicrophone } from "react-icons/hi2";
 import { useDispatch } from "react-redux";
-import { toggleIsListening } from "../../Redux/SearchRecognition/Slice";
+import { toggleIsListening } from "../../Redux/SearchRecognition/slice";
 import styles from "./voiceSearch.module.css";
 import { useEffect } from "react";
 
