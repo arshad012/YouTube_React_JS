@@ -69,7 +69,7 @@ function Watch() {
             <Box w="100%" h="fit-content" borderRadius="2xl" overflow="hidden">
               <iframe
                 width="100%"
-                height={windowWidth < 600 ? "350" : "500"}
+                height={windowWidth < 600 ? "250" : "500"}
                 // src={`https://www.youtube.com/embed/${v}?autoplay=1&mute=1&videoEmbeddable=true&type=playlist`}
                 src={`https://www.youtube.com/embed/${v}?autoplay=1&mute=1`}
                 title="YouTube video player"
