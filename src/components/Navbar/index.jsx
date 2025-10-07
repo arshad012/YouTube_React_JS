@@ -4,7 +4,7 @@ import { Search2Icon, DragHandleIcon } from "@chakra-ui/icons";
 import SidebarButton_logo from "./SidebarButton_logo";
 import UserInfo from "./UserInfo";
 import SearchBar from "./SearchBar";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SmallScreenSearchBar from "../SmallScreenSearchBar";
 import { toggleShowMenu } from '../../Redux/ShowMenuSmallScreen/slice';
 import { useDispatch, useSelector } from "react-redux";
@@ -23,9 +23,14 @@ function Navbar() {
     const dispatch = useDispatch();
     const { videos } = useSelector(searchedDataSelector);
     const { showMenu } = useSelector(showMenuSmallScreenSelector);
+    const isFirstRun = useRef(true);
     const youtubeLoggedinUser = JSON.parse(localStorage.getItem(youtubeLoggedinUser_localStorage_key)) ?? {};
 
     useEffect(() => {
+        if(isFirstRun.current) {
+            isFirstRun.current = false;
+            return;
+        }
         handleToggleSmallScreenSearchBar();
     }, [videos]);
 
