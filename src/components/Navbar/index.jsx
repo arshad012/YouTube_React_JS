@@ -1,5 +1,5 @@
 import { Box, Flex, Hide, IconButton, MenuButton, Show, Spacer, Switch, useColorModeValue, Menu, Avatar, MenuList, MenuItem, Text, useColorMode } from "@chakra-ui/react";
-import { Search2Icon, ArrowBackIcon, DragHandleIcon } from "@chakra-ui/icons";
+import { Search2Icon, DragHandleIcon } from "@chakra-ui/icons";
 
 import SidebarButton_logo from "./SidebarButton_logo";
 import UserInfo from "./UserInfo";

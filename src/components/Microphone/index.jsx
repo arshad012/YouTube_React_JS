@@ -2,7 +2,7 @@ import { IconButton, useColorModeValue } from "@chakra-ui/react";
 import { HiMiniMicrophone } from "react-icons/hi2";
 import { useEffect, useRef, useState } from "react";
 
-import { toggleIsListening } from "../../Redux/SearchRecognition/Slice";
+import { toggleIsListening } from "../../Redux/SearchRecognition/slice";
 import { useSelector, useDispatch } from "react-redux";
 import { SearchRecognitionSelector } from "../../Redux/SearchRecognition/selector";
 import { updateSearchQuery } from "../../Redux/SearchQuery/slice";
