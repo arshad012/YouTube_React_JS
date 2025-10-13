@@ -1,19 +1,16 @@
-import { Box, Show, SimpleGrid } from "@chakra-ui/react";
-import HeightFiller from "../../components/HeightFiller";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { searchedDataSelector } from '../../Redux/searchedData/selector';
 import VideoCard from "../../components/VideoCard";
 import { useNavigate } from "react-router-dom";
 import { updateClickedVideoDetails } from "../../Redux/searchedData/slice";
 import EmptyPage from "../../components/EmptyPage";
-import BottomBar from "../../components/BottomBar";
 import { useEffect, useRef } from "react";
 
 function Home() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { videos } = useSelector(searchedDataSelector);
-    const containerRef = useRef(null);
     const isFirstRun = useRef(true);
 
     useEffect(() => {
@@ -22,7 +19,7 @@ function Home() {
             return;
         }
         
-        containerRef.current.scrollTo({ top: 0 });
+        window.scrollTo({ top: 0 });
     }, [videos]);
 
     const handleVideoClick = (videoDetails) => {
@@ -36,14 +33,9 @@ function Home() {
 
     return (
         <Box
-            maxH='100%'
             py={2}
-            overflowY="scroll"
             paddingX={{ base: 0, sm: 5, lg: 10 }}
-            ref={containerRef}
         >
-            <HeightFiller />
-
             <SimpleGrid
                 mt={{ base: 0, md: 10 }}
                 columns={{ base: 1, sm: 2, xl: 3 }}
@@ -59,12 +51,6 @@ function Home() {
                     />
                 ))}
             </SimpleGrid>
-
-            <Show breakpoint='(max-width: 750px)'>
-                <BottomBar />
-            </Show>
-
-            <HeightFiller />
         </Box>
     )
 }

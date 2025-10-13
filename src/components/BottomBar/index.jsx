@@ -2,13 +2,10 @@ import { Box, HStack, Text, VStack, Avatar, useColorModeValue } from "@chakra-ui
 import { useNavigate } from "react-router-dom";
 import { House, Youtube, Package2 } from 'lucide-react';
 import { youtubeLoggedinUser_localStorage_key } from "../../Utils";
-import { useSelector } from "react-redux";
-import { showMenuSmallScreenSelector } from "../../Redux/ShowMenuSmallScreen/selector";
 
 function BottomBar() {
     const bgColor = useColorModeValue("rgba(255,255,255, 0.9)", "rgba(15, 15, 15, 0.8)");
 
-    const { showMenu } = useSelector(showMenuSmallScreenSelector);
     const navigate = useNavigate();
     const youtubeLoggedinUser = JSON.parse(localStorage.getItem(youtubeLoggedinUser_localStorage_key)) ?? {};
 
@@ -46,11 +43,11 @@ function BottomBar() {
 
     return (
         <Box
-            position='absolute'
-            left={0}
-            bottom={showMenu ? "60px" : 0}
+            position='sticky'
+            bottom="0"
+            left="0"
             w='100%'
-            h='50px'
+            minH='50px'
             bgColor={bgColor}
             backdropFilter='blur(20px)'
             py={1}

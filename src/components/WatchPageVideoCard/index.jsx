@@ -16,25 +16,21 @@ function WatchPageVideoCard({ item, onClick }) {
     }
 
     return (
-        <Box
-            w="full"
-        >
+        <Box>
             <Flex direction={{ base: "column", sm: "row" }} gap={{base: 2, sm: 5}}>
                 <Box w={{base: "full", sm: "40%"}}>
                     <Image
                         src={item.snippet.thumbnails.high.url}
                         alt="Thumbnail not available"
                         w="full"
-                        borderRadius="xl"
+                        borderRadius={{sm: "xl"}}
                         onClick={() => onClick(item)}
                         _hover={{ cursor: "pointer" }}
                     />
                 </Box>
 
                 <Hide below="sm">
-                    <Box
-                        flex={1}
-                    >
+                    <Box flex={1}>
                         <VStack justify="start" align="start" px={{ base: 5, sm: 0 }}>
 
                             <Text
@@ -70,8 +66,8 @@ function WatchPageVideoCard({ item, onClick }) {
                             <Text
                                 onClick={() => onClick(item)}
                             >{title}</Text>
-                            <Text color="whiteAlpha.700" fontSize={{ base: "xs", sm: "sm" }}>{item.snippet.channelTitle}</Text>
-                            <Text color="whiteAlpha.700" fontSize={{ base: "xs", sm: "sm" }}>{getTimeTaken(item.snippet.publishTime)}</Text>
+                            <Text color={textColor} fontSize={{ base: "xs", sm: "sm" }}>{item.snippet.channelTitle} <CheckCircleIcon color="whiteAlpha.700" boxSize={3} ml={1} /></Text>
+                            <Text color={textColor} fontSize={{ base: "xs", sm: "sm" }}>{getTimeTaken(item.snippet.publishTime)}</Text>
                         </VStack>
                     </HStack>
                 </Show>

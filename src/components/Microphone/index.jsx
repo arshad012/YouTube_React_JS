@@ -30,11 +30,12 @@ function NavbarMicrophone() {
             recognition.stop();
             setRecognition(null);
         }
+
     }, [isListening]);
 
 
     useEffect(() => {
-        if(isFirstRun.current) {
+        if (isFirstRun.current) {
             isFirstRun.current = false;
             return;
         }
@@ -55,6 +56,11 @@ function NavbarMicrophone() {
         searchData(voiceSearchQuery);
     }, [voiceSearchQuery]);
 
+    // const playSound = (file) => {
+    //     const audio = new Audio(file);
+    //     audio.play();
+    // };
+
     const handleMicClick = () => {
         iconRef.current.blur();
 
@@ -70,6 +76,7 @@ function NavbarMicrophone() {
         recog.interimResults = false;
 
         recog.onstart = () => {
+            // playSound("../../audio/microphone_start.mp3");
             dispatch(toggleIsListening(true));
             console.log("Voice recognition started. Speak now...");
         };
@@ -80,16 +87,18 @@ function NavbarMicrophone() {
             dispatch(toggleIsListening(false));
             dispatch(updateSearchQuery(transcript));
             setVoiceSearchQuery(transcript);
+            // playSound("../../audio/microphone_stop.mp3");
         };
 
         recog.onerror = (event) => {
             console.error("Error occurred in recognition:", event.error);
             dispatch(toggleIsListening(false));
         };
-
+        
         recog.onend = () => {
             console.log('Voice recongnition stopped');
             dispatch(toggleIsListening(false))
+            // playSound("../../audio/microphone_stop.mp3");
         };
 
         recog.start();
@@ -106,9 +115,9 @@ function NavbarMicrophone() {
             // bg='#222222'
             // _hover={{ bg: '#434242ff' }}
             // _active={{ bg: '#565353ff' }}
-            bg={{base: "transparent", sm: bgColor}}
-            _hover={{base: { bg: "tranparent" }, sm: { bg: menuHover }}}
-            _active={{base: { bg: "tranparent" }, sm: { bg: menuActive }}}
+            bg={{ base: "transparent", md: bgColor }}
+            _hover={{ base: { bg: "tranparent" }, md: { bg: menuHover } }}
+            _active={{ base: { bg: "tranparent" }, md: { bg: menuActive } }}
             onClick={handleMicClick}
             ref={iconRef}
         />

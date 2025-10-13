@@ -1,6 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Box, useColorMode } from "@chakra-ui/react"
+import { Box, Show, useColorMode } from "@chakra-ui/react"
 import { Provider, useSelector } from 'react-redux'
 
 import Navbar from './components/Navbar';
@@ -15,19 +15,21 @@ import { Store } from './Redux';
 import NotFound from './pages/NotFound';
 
 import RestComponents from './components/restComponents';
+import BottomBar from './components/BottomBar';
 
 function App() {
   const { colorMode } = useColorMode();
 
   return (
-    <Box position='relative' h='100vh' bgColor={colorMode === "light" ? "#ffffff" : "#0f0f0f"}>
+    <Box bgColor={colorMode === "light" ? "#ffffff" : "#0f0f0f"}>
       <Provider store={Store}>
         <YoutubeDrawer />
-        
+
         <RestComponents />
         {/*  */}
         <BrowserRouter>
           <Navbar />
+
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/watch" element={<Watch />} />
@@ -36,7 +38,12 @@ function App() {
             <Route path="/you" element={<You />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          
+          <Show breakpoint='(max-width: 750px)'>
+            <BottomBar />
+          </Show>
         </BrowserRouter>
+
       </Provider>
     </Box>
   )

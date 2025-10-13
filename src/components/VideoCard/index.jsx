@@ -20,7 +20,7 @@ function VideoCard({ item, onClick }) {
                 <Image
                     src={item.snippet.thumbnails.high.url}
                     alt="Thumbnail not available" w="full"
-                    borderRadius="xl"
+                    borderRadius={{sm: "xl"}}
                     onClick={() => onClick(item)}
                     _hover={{cursor: "pointer"}}
                 />

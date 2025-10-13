@@ -1,27 +1,16 @@
-import { Box, Show, Text, useColorModeValue } from "@chakra-ui/react";
-import BottomBar from "../../components/BottomBar";
-import HeightFiller from "../../components/HeightFiller";
+import { Box, Text } from "@chakra-ui/react";
 
 function Subscription() {
     return (
         <Box
             w="100%"
-            maxH='100%'
-            overflowY="scroll"
+            h="calc(100vh - 110px)"
+            overflow="auto"
         >
-            <HeightFiller />
-            
             <Text
-                fontSize="xl"
-                mt={10}
+                mt={2}
                 align="center"
             >Subscription details not available</Text>
-
-            <Show breakpoint='(max-width: 750px)'>
-                <BottomBar />
-            </Show>
-
-            <HeightFiller />
         </Box>
     )
 }

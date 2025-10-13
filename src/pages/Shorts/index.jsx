@@ -1,27 +1,17 @@
-import { Box, Show, Text, useColorModeValue } from "@chakra-ui/react";
-import HeightFiller from "../../components/HeightFiller";
-import BottomBar from "../../components/BottomBar";
+import { Box, Text } from "@chakra-ui/react";
 
 function Shorts() {
     return (
         <Box
             w="100%"
-            maxH='100%'
-            overflowY="scroll"
+            h="calc(100vh - 110px)"
+            overflow="auto"
         >
-            <HeightFiller />
-
             <Text
-                fontSize="xl"
-                mt={10}
+                mt={2}
                 align="center"
-            >Content not available</Text>
+            >Oops, Content not available</Text>
 
-            <Show breakpoint='(max-width: 750px)'>
-                <BottomBar />
-            </Show>
-
-            <HeightFiller />
         </Box>
     )
 }

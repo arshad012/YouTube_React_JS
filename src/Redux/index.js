@@ -3,7 +3,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import searchQuerySlice from './SearchQuery/slice';
 import YoutubeSidebarSlice from './YoutubeSidebar/slice';
 import searchedDataSlice from './searchedData/slice';
-import ShowMenuSmallScreenSlice from './ShowMenuSmallScreen/slice';
 import SearchRecognitionSlice from './SearchRecognition/slice';
 
 export const Store = configureStore({
@@ -11,7 +10,6 @@ export const Store = configureStore({
         searchQuery: searchQuerySlice,
         sidebarState: YoutubeSidebarSlice,
         searchedData: searchedDataSlice,
-        ShowMenuSmallScreen: ShowMenuSmallScreenSlice,
         SearchRecognition: SearchRecognitionSlice
     }
 })

@@ -1,18 +1,24 @@
-import { Box, Text, VStack, Flex, HStack, Image, Show, useColorModeValue, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  VStack,
+  Flex,
+  HStack,
+  Image,
+  useColorModeValue,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
-import HeightFiller from "../../components/HeightFiller";
 import { useSelector, useDispatch } from "react-redux";
-import { CheckCircleIcon } from '@chakra-ui/icons';
+import { CheckCircleIcon } from "@chakra-ui/icons";
 
 import { searchedDataSelector } from "../../Redux/searchedData/selector";
 import MiniVideoCard from "../../components/MiniVideoCard";
 import "../../App.css";
 import { updateClickedVideoDetails } from "../../Redux/searchedData/slice";
-import { useEffect, useRef } from "react";
-import BottomBar from "../../components/BottomBar";
 import WatchPageVideoCard from "../../components/WatchPageVideoCard";
 import { getTimeTaken } from "../../Utils";
-
+import { useEffect } from "react";
 
 function Watch() {
   const { colorMode } = useColorMode();
@@ -21,10 +27,14 @@ function Watch() {
   const borderColor = useColorModeValue("gray.500", "whiteAlpha.700");
 
   const dispatch = useDispatch();
-  const containerRef = useRef(null);
   const { clickedVideoDetails, videos } = useSelector(searchedDataSelector);
   const [searchParams, setSearchParams] = useSearchParams();
   const v = searchParams.get("v") ?? "";
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
+
   const windowWidth = window.innerWidth;
 
   const smallDataSlice = videos.slice(0, 20);
@@ -34,72 +44,82 @@ function Watch() {
     const limit = 60;
     if (playingVideoTitle.length > limit) {
       playingVideoTitle = playingVideoTitle.slice(0, limit);
-      playingVideoTitle += "..."
+      playingVideoTitle += "...";
     }
   }
 
   const handleVideoClick = (videoDetails) => {
-    setSearchParams({ v: videoDetails.id.videoId })
-    containerRef.current.scrollTo({ top: 0 });
+    setSearchParams({ v: videoDetails.id.videoId });
+    window.scrollTo({ top: 0 });
     dispatch(updateClickedVideoDetails(videoDetails));
-  }
-
+  };
 
   return (
     <Box
-      maxH='100%'
-      py={2}
-      overflowY="scroll"
-      paddingX={{ base: 0, sm: "20px", md: "30px", lg: "40px", xl: "80px" }}
-      ref={containerRef}
     // bgColor={{base: "red.200", sm: "purple.200", md: "green.200", lg: "yellow.300", xl: "teal.200", "2xl": "pink.400"}}
     >
-      <HeightFiller />
-
       {/* Top part */}
       <Flex
         gap={{ base: "50px", lg: "15px", xl: "30px", "2xl": "50px" }}
-        mt={{base: 0, md: 5}} 
-        h="fit-content"
-        direction={{ base: "column", lg: 'row' }}
+        mt={{ base: 0, md: 5 }}
+        direction={{ base: "column", lg: "row" }}
+        paddingX={{ base: 0, md: "30px", lg: "40px", xl: "80px" }}
       >
-        {clickedVideoDetails?.kind &&
-        // 1st child
+        {clickedVideoDetails?.kind && (
+          // 1st child
           <VStack w={{ base: "full", lg: "67%" }} h="fit-content" align="start">
-            <Box w="100%" h="fit-content" borderRadius="2xl" overflow="hidden">
+            <Box
+              w="100%"
+              h="fit-content"
+              borderRadius={{ md: "2xl" }}
+              overflow="hidden"
+            >
               <iframe
                 width="100%"
                 height={windowWidth < 600 ? "250" : "500"}
-                // src={`https://www.youtube.com/embed/${v}?autoplay=1&mute=1&videoEmbeddable=true&type=playlist`}
-                src={`https://www.youtube.com/embed/${v}?autoplay=1&mute=1`}
+                src={`https://www.youtube.com/embed/${v}?autoplay=1&mute=1&volume=50`}
                 title="YouTube video player"
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen={true}
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen={true}
                 autoFocus={true}
               ></iframe>
             </Box>
 
-            <Box px={{ base: 5, sm: 0 }}>
-              <Text fontSize={{base: "md", sm: "lg", md: "xl"}}>{clickedVideoDetails.snippet.title}</Text>
+            <Box px={{ base: 5, md: 0 }}>
+              <Text fontSize={{ base: "md", sm: "lg", md: "xl" }}>
+                {clickedVideoDetails.snippet.title}
+              </Text>
 
               <HStack justify="start" align="center" w="full" gap={5}>
-                <Box h={{ base: "40px", sm: "50px" }} w={{ base: "40px", sm: "50px" }} mt={1}>
-                  <Image boxSize="full" borderRadius="full" src={clickedVideoDetails.snippet.thumbnails.default.url} alt="" />
+                <Box
+                  h={{ base: "40px", sm: "50px" }}
+                  w={{ base: "40px", sm: "50px" }}
+                  mt={1}
+                >
+                  <Image
+                    boxSize="full"
+                    borderRadius="full"
+                    src={clickedVideoDetails.snippet.thumbnails.default.url}
+                    alt=""
+                  />
                 </Box>
-                <Text>{clickedVideoDetails.snippet.channelTitle} <CheckCircleIcon color="whiteAlpha.700" boxSize={3} /></Text>
+                <Text>
+                  {clickedVideoDetails.snippet.channelTitle}{" "}
+                  <CheckCircleIcon color="whiteAlpha.700" boxSize={3} />
+                </Text>
               </HStack>
-              <Text 
-                fontSize={{base: "xs", sm: "sm"}} 
+              <Text
+                fontSize={{ base: "xs", sm: "sm" }}
                 mt={2}
                 color={textColor}
-              >{getTimeTaken(clickedVideoDetails.snippet.publishTime)}</Text>
+              >
+                {getTimeTaken(clickedVideoDetails.snippet.publishTime)}
+              </Text>
             </Box>
-
           </VStack>
-        }
-
+        )}
 
         {/* 2nd child */}
         <Flex
@@ -114,13 +134,13 @@ function Watch() {
           h="500px"
           mt={0}
         >
-          <Box
-            minH="100px"
-            bgColor={bgColor}
-            p={3}
-          >
-            <Text fontSize="lg" fontWeight="bold">{playingVideoTitle}</Text>
-            <Text color={textColor}>{clickedVideoDetails?.snippet?.channelTitle}</Text>
+          <Box minH="100px" bgColor={bgColor} p={3}>
+            <Text fontSize="lg" fontWeight="bold">
+              {playingVideoTitle}
+            </Text>
+            <Text color={textColor}>
+              {clickedVideoDetails?.snippet?.channelTitle}
+            </Text>
           </Box>
 
           <VStack
@@ -130,41 +150,27 @@ function Watch() {
             overflowY="scroll"
           >
             {smallDataSlice.map((video, i) => (
-              <MiniVideoCard
-                key={i}
-                item={video}
-                onClick={handleVideoClick}
-              />
+              <MiniVideoCard key={i} item={video} onClick={handleVideoClick} />
             ))}
           </VStack>
         </Flex>
-
       </Flex>
 
       {/* Below part */}
 
-      <VStack 
-        mt={20} 
+      <VStack
+        mt={20}
+        mb={{ base: "15px", sm: "40px" }}
         gap={"40px"}
         align="start"
-        paddingX={{ base: 0, sm: "10px", md: "15px", lg: "40px" }}
+        paddingX={{ sm: "30px", md: "40px", lg: "50px", xl: "120px" }}
       >
         {videos.map((video, i) => (
-          <WatchPageVideoCard
-            key={i}
-            item={video}
-            onClick={handleVideoClick}
-          />
+          <WatchPageVideoCard key={i} item={video} onClick={handleVideoClick} />
         ))}
       </VStack>
-
-      <Show breakpoint='(max-width: 750px)'>
-        <BottomBar />
-      </Show>
-
-      <HeightFiller />
     </Box>
-  )
+  );
 }
 
 export default Watch;
