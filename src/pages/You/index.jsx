@@ -3,8 +3,9 @@ import { SettingsIcon } from "@chakra-ui/icons";
 
 function You() {
     const { colorMode, toggleColorMode } = useColorMode();
-    const bgColor = useColorModeValue("#ffffff", "#0f0f0f");
+    const bgColor = useColorModeValue("#e8e3e2", "#303030");
     const menuHover = useColorModeValue("#d8d4d3ff", "#434242ff");
+    const menuActive = useColorModeValue("#c7c3c2ff", "#565353ff");
 
     return (
         <Box
@@ -17,15 +18,15 @@ function You() {
                 align="center"
             >Account adjustments can be done here</Text>
 
-            <HStack justify="end" px={2}>
+            <HStack justify="end" px={3}>
                 <Menu>
                     <MenuButton
                         as={IconButton}
                         borderRadius='full'
                         bg='inherit'
                         _hover={{ bg: "" }}
+                        _active={{ bg: menuActive }}
                         icon={<SettingsIcon boxSize={5} />} 
-                        boxShadow="md"
                     >Appearence</MenuButton>
 
                     <MenuList bg={bgColor} border='none'>
@@ -34,7 +35,7 @@ function You() {
                             bg={bgColor}
                             _hover={{ bg: menuHover }}
                         >
-                            {colorMode === "light" ? "Use dark mode" : "User light mode"}
+                            {colorMode === "light" ? "Use dark mode" : "Use light mode"}
                         </MenuItem>
                     </MenuList>
                 </Menu>

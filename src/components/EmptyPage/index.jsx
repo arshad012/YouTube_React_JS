@@ -4,8 +4,13 @@ import HeightFiller from "../HeightFiller";
 function EmptyPage() {
     const bgColor = useColorModeValue("#e8e3e2", "#303030");
     const textColor = useColorModeValue("black", "white");
+    
     return (
-        <Box>
+        <Box
+            w="100%"
+            h="calc(100vh - 110px)"
+            overflow="auto"
+        >
             <HeightFiller />
             <Text
                 color={textColor}
