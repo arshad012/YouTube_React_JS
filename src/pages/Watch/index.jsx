@@ -20,7 +20,7 @@ import WatchPageVideoCard from "../../components/WatchPageVideoCard";
 import { getTimeTaken } from "../../Utils";
 import { useEffect } from "react";
 
-function Watch() {
+function Watch({ triggerScroll }) {
   const { colorMode } = useColorMode();
   const textColor = useColorModeValue("#6c6c6c", "whiteAlpha.700");
   const bgColor = useColorModeValue("#e8e3e2", "#303030");
@@ -32,7 +32,7 @@ function Watch() {
   const v = searchParams.get("v") ?? "";
 
   useEffect(() => {
-    window.scrollTo({ top: 0 });
+    triggerScroll();
   }, []);
 
   const windowWidth = window.innerWidth;
@@ -50,14 +50,12 @@ function Watch() {
 
   const handleVideoClick = (videoDetails) => {
     setSearchParams({ v: videoDetails.id.videoId });
-    window.scrollTo({ top: 0 });
+    triggerScroll();
     dispatch(updateClickedVideoDetails(videoDetails));
   };
 
   return (
-    <Box
-    // bgColor={{base: "red.200", sm: "purple.200", md: "green.200", lg: "yellow.300", xl: "teal.200", "2xl": "pink.400"}}
-    >
+    <Box>
       {/* Top part */}
       <Flex
         gap={{ base: "50px", lg: "15px", xl: "30px", "2xl": "50px" }}

@@ -1,5 +1,5 @@
 import { Box, Text, useColorModeValue } from "@chakra-ui/react";
-import HeightFiller from "../HeightFiller";
+import { height } from "../../Utils";
 
 function EmptyPage() {
     const bgColor = useColorModeValue("#e8e3e2", "#303030");
@@ -8,10 +8,9 @@ function EmptyPage() {
     return (
         <Box
             w="100%"
-            h="calc(100vh - 110px)"
+            h={height}
             overflow="auto"
         >
-            <HeightFiller />
             <Text
                 color={textColor}
                 textAlign="center"

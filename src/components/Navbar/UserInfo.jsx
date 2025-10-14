@@ -1,10 +1,11 @@
-import { Box, Button, Flex, Avatar, Menu, MenuButton, MenuList, MenuItem, IconButton, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, Flex, Avatar, Menu, MenuButton, MenuList, MenuItem, IconButton, Text, useColorMode, useColorModeValue, useToast } from "@chakra-ui/react";
 import { AddIcon, BellIcon, PlusSquareIcon } from "@chakra-ui/icons";
 import { IoCreateOutline } from "react-icons/io5";
 import { HiOutlineSignalSlash } from "react-icons/hi2";
 import { youtubeLoggedinUser_localStorage_key } from "../../Utils";
 
 function UserInfo() {
+    const toast = useToast();
     const { colorMode, toggleColorMode } = useColorMode();
     const bgColor = useColorModeValue("#e8e3e2", "#303030");
     const textColor = useColorModeValue("black", "white");
@@ -13,6 +14,17 @@ function UserInfo() {
     const menuListHover = useColorModeValue("#c7c3c2ff", "#585555ff");
 
     const youtubeLoggedinUser = JSON.parse(localStorage.getItem(youtubeLoggedinUser_localStorage_key)) ?? {};
+
+    const handleNonWorkingFeatureClick = (title) => {
+        toast({
+          title: title,
+          description: "This is not a working feature, yet you are seeing it just to feel like real youtube UI.",
+          status: 'warning',
+          duration: 9000,
+          isClosable: true,
+          position: 'bottom-right'
+        })
+    }
     
     return (
         <Box h='full'>
@@ -37,6 +49,7 @@ function UserInfo() {
                             bg={bgColor} 
                             color={textColor} 
                             _hover={{ bg: menuListHover }}
+                            onClick={() => handleNonWorkingFeatureClick('Upload video error')}
                         >
                             <PlusSquareIcon mr={4} boxSize={5} /> Upload video
                         </MenuItem>
@@ -45,6 +58,7 @@ function UserInfo() {
                             bg={bgColor} 
                             color={textColor} 
                             _hover={{ bg: menuListHover }}
+                            onClick={() => handleNonWorkingFeatureClick('Go live error')}
                         >
                             <HiOutlineSignalSlash style={{ marginRight: '15px' }} size={22} /> Go live
                         </MenuItem>
@@ -52,6 +66,7 @@ function UserInfo() {
                             bg={bgColor} 
                             color={textColor} 
                             _hover={{ bg: menuListHover }}
+                            onClick={() => handleNonWorkingFeatureClick('Create post error')}
                         >
                             <IoCreateOutline style={{ marginRight: '15px' }} size={22} /> Create post
                         </MenuItem>
@@ -97,13 +112,14 @@ function UserInfo() {
                         >
                             Profile
                         </Text>
-                        <MenuItem 
+
+                        {/* <MenuItem 
                             bg={bgColor} 
                             color={textColor} 
                             _hover={{ bg: menuHover }}
                         >
                             Upload video
-                        </MenuItem>
+                        </MenuItem> */}
                         
                         <MenuItem 
                             onClick={toggleColorMode}

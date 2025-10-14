@@ -7,19 +7,19 @@ import { updateClickedVideoDetails } from "../../Redux/searchedData/slice";
 import EmptyPage from "../../components/EmptyPage";
 import { useEffect, useRef } from "react";
 
-function Home() {
+function Home({ triggerScroll }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { videos } = useSelector(searchedDataSelector);
     const isFirstRun = useRef(true);
-
+    
     useEffect(() => {
         if(isFirstRun.current) {
             isFirstRun.current = false;
             return;
         }
         
-        window.scrollTo({ top: 0 });
+        triggerScroll();
     }, [videos]);
 
     const handleVideoClick = (videoDetails) => {

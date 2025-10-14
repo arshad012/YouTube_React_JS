@@ -1,5 +1,5 @@
-import { Box, Flex, Hide, IconButton, MenuButton, Show, Spacer, useColorModeValue, Menu, MenuList, MenuItem, Text, useColorMode } from "@chakra-ui/react";
-import { Search2Icon, DragHandleIcon } from "@chakra-ui/icons";
+import { Box, Flex, Hide, IconButton, Show, Spacer, useColorModeValue } from "@chakra-ui/react";
+import { Search2Icon } from "@chakra-ui/icons";
 
 import SidebarButton_logo from "./SidebarButton_logo";
 import UserInfo from "./UserInfo";
@@ -36,8 +36,8 @@ function Navbar() {
             backdropFilter='blur(20px)'
             h='60px'
             w='100%'
-            pl={{ base: 4, lg: 5 }}
-            pr={{ base: 3, lg: 7 }}
+            pl={4}
+            pr={{ base: 3, md: 5, lg: 7 }}
             position='sticky'
             top='0'
             left='0'

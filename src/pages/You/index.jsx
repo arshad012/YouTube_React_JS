@@ -1,23 +1,25 @@
-import { Box, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, useColorMode, useColorModeValue, VStack } from "@chakra-ui/react";
 import { SettingsIcon } from "@chakra-ui/icons";
+import { height } from "../../Utils";
+import { useNavigate } from "react-router-dom";
 
 function You() {
     const { colorMode, toggleColorMode } = useColorMode();
     const bgColor = useColorModeValue("#e8e3e2", "#303030");
     const menuHover = useColorModeValue("#d8d4d3ff", "#434242ff");
     const menuActive = useColorModeValue("#c7c3c2ff", "#565353ff");
+    const navigate = useNavigate();
 
     return (
         <Box
             w="100%"
-            h="calc(100vh - 110px)"
+            h={height}
             overflow="auto"
         >
-            <Text
+            {/* <Text
                 mt={2}
                 align="center"
-            >Account adjustments can be done here</Text>
-
+            >Account adjustments can be done here</Text> */}
             <HStack justify="end" px={3}>
                 <Menu>
                     <MenuButton
@@ -40,6 +42,11 @@ function You() {
                     </MenuList>
                 </Menu>
             </HStack>
+
+            <VStack align="start" px={5}>
+                <Button onClick={() => navigate("/watch-history")}>History</Button>
+                <Button onClick={() => navigate("/watch-later")}>Watch later</Button>
+            </VStack>
         </Box>
     )
 }

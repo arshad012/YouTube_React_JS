@@ -6,7 +6,6 @@ import { toggleSidebar } from "../../Redux/YoutubeSidebar/slice";
 import { useNavigate } from "react-router-dom";
 
 function SidebarButton_logo() {
-    // const bgColor = useColorModeValue("#e8e3e2", "#303030");
     const { colorMode } = useColorMode();
     const textColor = useColorModeValue("black", "white");
     const menuHover = useColorModeValue("#d8d4d3ff", "#434242ff");

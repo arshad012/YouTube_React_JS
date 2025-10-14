@@ -10,15 +10,20 @@ function NotFound() {
         navigate("/", { replace: true });
     }
 
+    const windowWidth = window.innerWidth;
+    let height;
+    if(windowWidth < 600) {
+        height = "calc(100vh - 110px)";
+    } else {
+        height = "calc(100vh - 60px)";
+    }
+
     return (
         <Box
             display="grid"
-            // justifyContent="center"
-            // alignItems="center"
             placeContent="center"
-            h="100vh"
+            h={height}
             w="100%"
-            // px={6}
         >
             <VStack spacing={6} textAlign="center">
                 <Heading fontSize={{ base: "6xl", md: "9xl" }} color="red.400">
@@ -36,12 +41,6 @@ function NotFound() {
                     Go Back Home
                 </Button>
             </VStack>
-
-            <Show breakpoint='(max-width: 750px)'>
-                <BottomBar />
-            </Show>
-
-            <HeightFiller />
         </Box>
     );
 }
