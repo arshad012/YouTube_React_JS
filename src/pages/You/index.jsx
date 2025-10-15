@@ -1,6 +1,5 @@
 import { Box, Button, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, useColorMode, useColorModeValue, VStack } from "@chakra-ui/react";
 import { SettingsIcon } from "@chakra-ui/icons";
-import { height } from "../../Utils";
 import { useNavigate } from "react-router-dom";
 
 function You() {
@@ -11,15 +10,7 @@ function You() {
     const navigate = useNavigate();
 
     return (
-        <Box
-            w="100%"
-            h={height}
-            overflow="auto"
-        >
-            {/* <Text
-                mt={2}
-                align="center"
-            >Account adjustments can be done here</Text> */}
+        <Box minH="100vh">
             <HStack justify="end" px={3}>
                 <Menu>
                     <MenuButton
@@ -29,7 +20,7 @@ function You() {
                         _hover={{ bg: "" }}
                         _active={{ bg: menuActive }}
                         icon={<SettingsIcon boxSize={5} />} 
-                    >Appearence</MenuButton>
+                    />
 
                     <MenuList bg={bgColor} border='none'>
                         <MenuItem

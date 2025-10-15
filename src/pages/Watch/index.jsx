@@ -54,7 +54,7 @@ function Watch({ triggerScroll }) {
   };
 
   return (
-    <Box>
+    <Box minH="100vh">
       {/* Top part */}
       <Flex
         gap={{ base: "50px", lg: "15px", xl: "30px", "2xl": "50px" }}
@@ -76,7 +76,7 @@ function Watch({ triggerScroll }) {
                 height={windowWidth < 600 ? "250" : "500"}
                 src={`https://www.youtube.com/embed/${v}?autoplay=1&mute=1&volume=50`}
                 title="YouTube video player"
-                frameBorder="0"
+                // frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen={true}
@@ -119,6 +119,7 @@ function Watch({ triggerScroll }) {
         )}
 
         {/* 2nd child */}
+
         <Flex
           direction={"column"}
           flex={{ base: "none", lg: 1 }}
@@ -154,7 +155,6 @@ function Watch({ triggerScroll }) {
       </Flex>
 
       {/* Below part */}
-
       <VStack
         mt={20}
         mb={{ base: "15px", sm: "40px" }}

@@ -35,6 +35,7 @@ function Home({ triggerScroll }) {
         <Box
             py={2}
             paddingX={{ base: 0, sm: 5, lg: 10 }}
+            minH="100vh"
         >
             <SimpleGrid
                 mt={{ base: 0, md: 10 }}

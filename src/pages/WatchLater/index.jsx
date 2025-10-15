@@ -1,14 +1,13 @@
 import { Text, Box } from "@chakra-ui/react";
-import { height } from "../../Utils";
 
 function WatchLater() {
     return (
-        <Box h={height}>
+        <Box minH="100vh">
             <Text
                 mt={2}
                 align="center"
                 fontSize={{base: "md", lg: "xl"}}
-            >This page is under maintanance</Text>
+            >Watch later page is under maintanance</Text>
         </Box>
     )
 }

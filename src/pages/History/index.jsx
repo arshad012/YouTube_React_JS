@@ -57,12 +57,7 @@ function History() {
     }
 
     return (
-        <Box
-            h={{base: "100vh", md: "auto"}}
-            // overflowY="auto"
-            // className={{base: "scrollbar-hide", md: ""}}
-            // className="scrollbar-hide"
-        >
+        <Box minH="100vh">
             <Flex
                 direction={{ base: "column-reverse", lg: "row" }}
                 justify={{ base: "start", lg: "center" }}

@@ -1,5 +1,4 @@
 import { Box, Text, useColorModeValue } from "@chakra-ui/react";
-import { height } from "../../Utils";
 
 function EmptyPage() {
     const bgColor = useColorModeValue("#e8e3e2", "#303030");
@@ -8,8 +7,7 @@ function EmptyPage() {
     return (
         <Box
             w="100%"
-            h={height}
-            overflow="auto"
+            minH="100vh"
         >
             <Text
                 color={textColor}
