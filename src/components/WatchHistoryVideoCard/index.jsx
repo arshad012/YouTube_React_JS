@@ -3,7 +3,7 @@ import { getTimeTaken } from "../../Utils";
 import { AddIcon, CheckCircleIcon } from "@chakra-ui/icons";
 import { EllipsisVertical } from "lucide-react";
 
-function WatchHistoryVideoCard({ item, onClick }) {
+function WatchHistoryVideoCard({ item, onClick, removeFromWatchHistory }) {
     const textColor = useColorModeValue("#6c6c6c", "whiteAlpha.700");
     const menuListHover = useColorModeValue("#c7c3c2ff", "#585555ff");
     const bgColor = useColorModeValue("#e8e3e2", "#303030");
@@ -21,16 +21,16 @@ function WatchHistoryVideoCard({ item, onClick }) {
         return <></> // it means this item is a channel and not a video so we will not append this item.
     }
 
-    const handleNonWorkingFeatureClick = () => {
-        toast({
-        //   title: title,
-          description: "Remove feature is under maintanance",
-          status: 'warning',
-          duration: 5000,
-          isClosable: true,
-          position: 'bottom'
-        })
-    }
+    // const handleNonWorkingFeatureClick = () => {
+    //     toast({
+    //     //   title: title,
+    //       description: "Remove feature is under maintanance",
+    //       status: 'warning',
+    //       duration: 5000,
+    //       isClosable: true,
+    //       position: 'bottom'
+    //     })
+    // }
 
     return (
         <Box>
@@ -76,7 +76,7 @@ function WatchHistoryVideoCard({ item, onClick }) {
                                             bg={bgColor}
                                             color={textColor}
                                             _hover={{ bg: menuListHover }}
-                                            onClick={handleNonWorkingFeatureClick}
+                                            onClick={() => removeFromWatchHistory(item.id.videoId)}
                                         >Remove from watch history
                                         </MenuItem>
                                     </MenuList>
@@ -123,7 +123,7 @@ function WatchHistoryVideoCard({ item, onClick }) {
                                     bg={bgColor}
                                     color={textColor}
                                     _hover={{ bg: menuListHover }}
-                                    onClick={handleNonWorkingFeatureClick}
+                                    onClick={() => removeFromWatchHistory(item.id.videoId)}
                                 >Remove from watch history
                                 </MenuItem>
                             </MenuList>

@@ -17,16 +17,21 @@ const searchedDataSlice = createSlice({
         updateClickedVideoDetails: (state, { payload }) => {
             // adding video to watch-history
             const watchHistoryVideos = JSON.parse(sessionStorage.getItem(watchHistory_localStorage_key)) ?? [];
-            watchHistoryVideos.push(payload);
+            watchHistoryVideos.unshift(payload);
             sessionStorage.setItem(watchHistory_localStorage_key, JSON.stringify(watchHistoryVideos));
 
             // adding video in sessionStorage to watch
             sessionStorage.setItem(clickedVideoDetails_key, JSON.stringify(payload));
             state.clickedVideoDetails = payload;
             state.watchHistory = watchHistoryVideos;
+        },
+        deleteWachedVideo: (state, { payload }) => {
+            const updatedWatchHistory = state.watchHistory.filter(item => item.id.videoId != payload);
+            sessionStorage.setItem(watchHistory_localStorage_key, JSON.stringify(updatedWatchHistory));
+            state.watchHistory = updatedWatchHistory;
         }
     }
 });
 
-export const { updateSearchedData, updateClickedVideoDetails } = searchedDataSlice.actions;
+export const { updateSearchedData, updateClickedVideoDetails, deleteWachedVideo } = searchedDataSlice.actions;
 export default searchedDataSlice.reducer;

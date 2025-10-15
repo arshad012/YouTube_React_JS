@@ -14,7 +14,6 @@ import { CheckCircleIcon } from "@chakra-ui/icons";
 
 import { searchedDataSelector } from "../../Redux/searchedData/selector";
 import MiniVideoCard from "../../components/MiniVideoCard";
-import "../../App.css";
 import { updateClickedVideoDetails } from "../../Redux/searchedData/slice";
 import WatchPageVideoCard from "../../components/WatchPageVideoCard";
 import { getTimeTaken } from "../../Utils";
