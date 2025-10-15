@@ -1,12 +1,11 @@
 import { Box, Flex, IconButton, Input, InputGroup, InputLeftElement, Text, useColorModeValue, VStack } from "@chakra-ui/react";
-import { height } from "../../Utils";
 import { useDispatch, useSelector } from "react-redux";
 import { searchedDataSelector } from "../../Redux/searchedData/selector";
 import WatchHistoryVideoCard from "../../components/WatchHistoryVideoCard";
 import { SearchIcon } from "lucide-react";
 import { updateClickedVideoDetails, deleteWachedVideo } from "../../Redux/searchedData/slice";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 function History() {
     const dispatch = useDispatch();

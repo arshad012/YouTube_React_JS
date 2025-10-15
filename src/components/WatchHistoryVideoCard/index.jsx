@@ -1,36 +1,22 @@
-import { Box, VStack, Image, HStack, Text, Flex, Hide, Show, useColorModeValue, Menu, MenuButton, MenuList, MenuItem, Button, Spacer, useToast } from "@chakra-ui/react";
+import { Box, VStack, Image, Text, Flex, Hide, Show, useColorModeValue, Menu, MenuButton, MenuList, MenuItem, Button, Spacer } from "@chakra-ui/react";
 import { getTimeTaken } from "../../Utils";
-import { AddIcon, CheckCircleIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import { EllipsisVertical } from "lucide-react";
 
 function WatchHistoryVideoCard({ item, onClick, removeFromWatchHistory }) {
     const textColor = useColorModeValue("#6c6c6c", "whiteAlpha.700");
     const menuListHover = useColorModeValue("#c7c3c2ff", "#585555ff");
     const bgColor = useColorModeValue("#e8e3e2", "#303030");
-    const menuHover = useColorModeValue("#d8d4d3ff", "#434242ff");
-    const menuActive = useColorModeValue("#c7c3c2ff", "#565353ff");
-    const toast = useToast();
 
     let title = item.snippet.title;
     if (window.innerWidth <= 1030) {
-        title = title.slice(0, 80);
+        title = title.slice(0, 50);
         title += "...";
     }
 
     if (item.id.channelId) {
         return <></> // it means this item is a channel and not a video so we will not append this item.
     }
-
-    // const handleNonWorkingFeatureClick = () => {
-    //     toast({
-    //     //   title: title,
-    //       description: "Remove feature is under maintanance",
-    //       status: 'warning',
-    //       duration: 5000,
-    //       isClosable: true,
-    //       position: 'bottom'
-    //     })
-    // }
 
     return (
         <Box>

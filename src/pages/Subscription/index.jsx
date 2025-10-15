@@ -1,13 +1,8 @@
 import { Box, Text } from "@chakra-ui/react";
-import { height } from "../../Utils";
 
 function Subscription() {
     return (
-        <Box
-            w="100%"
-            h={height}
-            overflow="auto"
-        >
+        <Box minH="100vh">
             <Text
                 mt={2}
                 align="center"
